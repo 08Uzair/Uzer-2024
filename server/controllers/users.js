@@ -31,6 +31,7 @@ export const signin = async (req, res) => {
 // SIGN UP
 export const signup = async (req, res) => {
   const {
+    avatar,
     fname,
     lname,
     country,
@@ -40,9 +41,6 @@ export const signup = async (req, res) => {
     email,
     password,
     number,
-    creditCard,
-    cardExpMo,
-    cardExpYr,
     address1,
     address2,
     createdAt,
@@ -57,6 +55,7 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const result = await user.create({
+      avatar,
       fname,
       lname,
       country,
@@ -66,9 +65,6 @@ export const signup = async (req, res) => {
       email,
       password: hashedPassword,
       number,
-      creditCard,
-      cardExpMo,
-      cardExpYr,
       address1,
       address2,
       createdAt,
@@ -80,20 +76,16 @@ export const signup = async (req, res) => {
 
     res.status(201).json({ result, token });
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong" });
-    error;
+    res.status(500);
+    console.log(error);
   }
 };
 
 //Get User
 export const getUsers = async (req, res) => {
   try {
-    const products = await user
-      .find()
-      .sort({ createdAt: -1 })
-      .populate("author")
-      .populate("category");
-    res.status(200).json({ products });
+    const users = await user.find().sort({ createdAt: -1 });
+    res.status(200).json({ users });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "failed" });
@@ -102,13 +94,29 @@ export const getUsers = async (req, res) => {
 
 // Get User by Id
 export const getUserById = async (req, res) => {
-  const { id } = req.params;
+  const { userId } = req.params;
   try {
-    const users = await user.findById(id);
+    const users = await user.findById(userId);
     if (!users) {
       return res.status(404).json({ message: "User Not Found" });
     }
     res.status(200).json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+// Delete User
+export const deleteUser = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const deletedUser = await user.findByIdAndDelete(userId);
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User Not Found" });
+    }
+    res.status(200).json({ message: "User Deleted Successfully" });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error" });

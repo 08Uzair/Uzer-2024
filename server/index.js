@@ -4,6 +4,7 @@ import cors from "cors";
 import { userRouter } from "./routes/users.js";
 import { productRouter } from "./routes/product.js";
 import { dataBaseConnection } from "./db/connection.js";
+import { messageRouter } from "./routes/inbox.js";
 
 const app = express();
 const PORT = 8000;
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 dataBaseConnection();
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/products", productRouter);
+app.use("/api/v1/inbox", messageRouter);
 app.listen(PORT, () => {
   console.log(`SERVER IS CONNECTED TO PORT ${PORT}`);
 });

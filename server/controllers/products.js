@@ -1,7 +1,5 @@
 import { product } from "../models/products.js";
 
-
-
 // Add Product
 export const addProduct = async (req, res) => {
   // console.log(req.body);
@@ -9,7 +7,7 @@ export const addProduct = async (req, res) => {
   const {
     name,
     description,
-    quantity,
+    stocks,
     price,
     color,
     size,
@@ -20,7 +18,7 @@ export const addProduct = async (req, res) => {
   const saveData = new product({
     name,
     description,
-    quantity,
+    stocks,
     price,
     color,
     size,
@@ -38,25 +36,16 @@ export const addProduct = async (req, res) => {
   }
 };
 
-
-
 //Get Product
 export const getProducts = async (req, res) => {
   try {
-    const products = await product
-      .find()
-      .sort({ createdAt: -1 })
-      .populate("author")
-      .populate("category");
+    const products = await product.find().sort({ createdAt: -1 });
     res.status(200).json({ products });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "failed" });
   }
 };
-
-
-
 
 // Get Product by Id
 export const getProductById = async (req, res) => {
@@ -73,9 +62,6 @@ export const getProductById = async (req, res) => {
   }
 };
 
-
-
-
 // Update Product
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
@@ -83,7 +69,7 @@ export const updateProduct = async (req, res) => {
   const {
     name,
     description,
-    quantity,
+    stocks,
     price,
     color,
     size,
@@ -96,7 +82,7 @@ export const updateProduct = async (req, res) => {
     const updatedata = {
       name,
       description,
-      quantity,
+      stocks,
       price,
       color,
       size,
@@ -121,8 +107,6 @@ export const updateProduct = async (req, res) => {
   }
 };
 
-
-
 // Delete Product
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
@@ -138,9 +122,6 @@ export const deleteProduct = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-
-
 
 // Search Product
 export const searchProduct = async (req, res) => {
@@ -160,3 +141,4 @@ export const searchProduct = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+

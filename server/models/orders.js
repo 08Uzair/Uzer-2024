@@ -13,6 +13,10 @@ const orderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  quantity: {
+    type : String,
+    required:true
+  }
 });
 
-export const order = mongoose.model("order",orderSchema)
+export const order = mongoose.model("order", orderSchema);

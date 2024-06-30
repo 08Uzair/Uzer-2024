@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
+  avatar: {
+    type: String,
+    required: true,
+  },
   fname: {
     type: String,
     required: true,
@@ -37,18 +41,6 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  creditCard: {
-    type: String,
-    required: true,
-  },
-  cardExpMo: {
-    type: String,
-    required: true,
-  },
-  cardExpYr: {
-    type: String,
-    required: true,
-  },
   address1: {
     type: String,
     required: true,
@@ -56,9 +48,14 @@ const userSchema = new mongoose.Schema({
   address2: {
     type: String,
   },
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
-export const user = mongoose.model("user",userSchema)
+export const user = mongoose.model("user", userSchema);
