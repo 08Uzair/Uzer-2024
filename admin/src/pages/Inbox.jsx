@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getInbox } from "../redux/actions/inbox";
+import React from "react";
+// import React, { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { getInbox } from "../redux/actions/inbox";
 
 const Inbox = () => {
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state);
-  useEffect(() => {
-    dispatch(getInbox());
-  }, []);
-  console.log(data);
+  // const dispatch = useDispatch();
+  // const data = useSelector((state) => state);
+  // useEffect(() => {
+  //   dispatch(getInbox());
+  // }, []);
+  // console.log(data);
   return (
     <div style={{ width: "85%" }}>
       <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">

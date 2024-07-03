@@ -15,6 +15,7 @@ export const addProduct = async (req, res) => {
     rank,
     image,
   } = req.body;
+  console.log(req.body);
   const saveData = new product({
     name,
     description,
@@ -31,7 +32,7 @@ export const addProduct = async (req, res) => {
     await saveData.save();
     res.status(200).json({ message: "Added Sucessfully" });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ message: `${error}` });
   }
 };
@@ -141,4 +142,3 @@ export const searchProduct = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-

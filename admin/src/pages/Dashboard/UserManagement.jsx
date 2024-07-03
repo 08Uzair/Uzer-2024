@@ -16,7 +16,7 @@ const UserManagement = () => {
     window.location.reload();
   };
   return (
-    <div style={{ width: "85%" }}>
+    <div style={{ width: "85%", height: "100vh" }}>
       <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
         <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
           <div className="flex items-center justify-between gap-8 mb-8">
@@ -25,7 +25,7 @@ const UserManagement = () => {
                 User Manager
               </h5>
               <p className="block mt-1 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-                Manage all the Users
+                Number of Users : {data?.length}
               </p>
             </div>
           </div>

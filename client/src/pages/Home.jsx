@@ -8,15 +8,17 @@ import Navbar from "../components/Navbar";
 
 const Home = () => {
   return (
-    <div>
-    <Navbar/>
-      <Gallery />
-      <ProductCard />
-      <Top />
-      <ProductCard />
-      <Label />
-      <Footer/>
-    </div>
+    <>
+      <Navbar />
+      <div className="m-8">
+        <Gallery />
+        <ProductCard />
+        <Top />
+        <ProductCard />
+        <Label />
+        <Footer />
+      </div>
+    </>
   );
 };
 

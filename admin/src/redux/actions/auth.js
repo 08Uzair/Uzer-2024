@@ -1,5 +1,5 @@
 import * as api from "../api";
-import { handleErrors } from "../../utility/handelError";
+import { toast } from "react-toastify";
 import {
   AUTH,
   FETCH_USER_ID,
@@ -11,7 +11,7 @@ export const signin = (newUser) => async (dispatch) => {
     const { data } = await api.signIn(newUser);
     dispatch({ type: AUTH, payload: data });
   } catch (error) {
-    return handleErrors(error.response.status);
+    return;
   }
 };
 
@@ -21,7 +21,6 @@ export const signUp = (newUser) => async (dispatch) => {
     dispatch({ type: AUTH, payload: data });
   } catch (error) {
     console.log(error);
-    handleErrors();
   }
 };
 
@@ -31,7 +30,6 @@ export const getUsers = () => async (dispatch) => {
     dispatch({ type: FETCH_USER, payload: data });
   } catch (error) {
     console.log(error);
-    handleErrors();
   }
 };
 
@@ -41,16 +39,15 @@ export const getUserByID = (id) => async (dispatch) => {
     dispatch({ type: FETCH_USER_ID, payload: data });
   } catch (error) {
     console.log(error);
-    handleErrors();
   }
 };
 
 export const deleteUser = (id) => async (dispatch) => {
   try {
+    toast.success("User Delete Sucessfull");
     await api.deleteUser(id);
     dispatch({ type: DELETE_USER, payload: id });
   } catch (error) {
     console.log(error);
-    handleErrors();
   }
 };

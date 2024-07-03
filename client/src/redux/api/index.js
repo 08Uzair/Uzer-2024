@@ -16,3 +16,11 @@ export const fetchUserById = (id) => API.get(`/user/${id}`);
 export const deleteUser = (id) => API.delete(`/user/${id}`);
 export const signUp = (newUser) => API.post("/user/signUp/", newUser);
 export const signIn = (newUser) => API.post("/user/signIn/", newUser);
+
+// PRODUCTS
+export const createProducts = (newProducts) =>
+  API.post("/products", newProducts);
+export const fetchProducts = () => API.get("/products");
+export const fetchProductsById = (id) => API.get(`/products/${id}`);
+export const deleteProducts = (id) => API.delete(`/products/${id}`);
+export const updateProducts = (id) => API.put(`/products/${id}`);

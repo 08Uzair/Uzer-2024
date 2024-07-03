@@ -19,12 +19,15 @@ const productSchema = new mongoose.Schema({
   },
   color: {
     type: String,
+    required: true,
   },
   size: {
     type: String,
+    required: true,
   },
   discount: {
     type: String,
+    required: true,
   },
   rank: {
     type: String,
@@ -34,6 +37,5 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
 });
-export const product = mongoose.model("product",productSchema)
+export const product = mongoose.model("product", productSchema);

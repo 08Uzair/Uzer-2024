@@ -42,6 +42,7 @@ const Auth = () => {
     } catch (error) {
       console.log(error);
     }
+
     window.location.reload();
   };
   const handleSignIn = async (e) => {
@@ -53,6 +54,7 @@ const Auth = () => {
       };
       console.log(user);
       await dispatch(signin(user));
+     
       navigate("/");
     } catch (error) {
       console.log(error);

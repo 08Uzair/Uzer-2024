@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ onItemClick }) => {
+  const navigate = useNavigate();
+
   const [activeItem, setActiveItem] = useState("home");
   useEffect(() => {
     const itemName = localStorage.getItem("itemName");
@@ -22,12 +25,21 @@ const Sidebar = ({ onItemClick }) => {
   const toggleEcommerceDropdown = () => {
     setIsEcommerceOpen(!isEcommerceOpen);
   };
-
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/auth");
+    window.location.reload();
+  };
   return (
     <div className="h-screen bg-gray-100 text-gray-900 flex flex-col max-w-xs transition-all rounded-lg shadow-lg">
       <div className="p-6 bg-blue-500 text-white  shadow-sm">
-        <h1 className="text-2xl font-bold
-        "  onClick={() => handleItemClick("home")}>Admin Panel</h1>
+        <h1
+          className="text-2xl font-bold
+        "
+          onClick={() => handleItemClick("home")}
+        >
+          Admin Panel
+        </h1>
       </div>
 
       <nav className="flex-1 overflow-y-auto">
@@ -52,7 +64,7 @@ const Sidebar = ({ onItemClick }) => {
             >
               <ul className="pl-8 space-y-1">
                 <li
-                  className={`p-4  flex items-center cursor-pointer rounded-lg transition-colors ${
+                  className={`p-4 hover:bg-gray-200 flex items-center cursor-pointer rounded-lg transition-colors ${
                     activeItem === "analytics" ? "bg-gray-300" : ""
                   } `}
                   onClick={() => handleItemClick("analytics")}
@@ -61,7 +73,7 @@ const Sidebar = ({ onItemClick }) => {
                   Analytics
                 </li>
                 <li
-                  className={`p-4  flex items-center cursor-pointer rounded-lg transition-colors ${
+                  className={`p-4  hover:bg-gray-200 flex items-center cursor-pointer rounded-lg transition-colors ${
                     activeItem === "users" ? "bg-gray-300" : ""
                   } `}
                   onClick={() => handleItemClick("users")}
@@ -92,7 +104,7 @@ const Sidebar = ({ onItemClick }) => {
             >
               <ul className="pl-8 space-y-1">
                 <li
-                  className={`p-4  flex items-center cursor-pointer rounded-lg transition-colors ${
+                  className={`p-4 hover:bg-gray-200 flex items-center cursor-pointer rounded-lg transition-colors ${
                     activeItem === "orders" ? "bg-gray-300" : ""
                   } `}
                   onClick={() => handleItemClick("orders")}
@@ -101,7 +113,7 @@ const Sidebar = ({ onItemClick }) => {
                   Orders Data
                 </li>
                 <li
-                  className={`p-4  flex items-center cursor-pointer rounded-lg transition-colors ${
+                  className={`p-4 hover:bg-gray-200 flex items-center cursor-pointer rounded-lg transition-colors ${
                     activeItem === "products" ? "bg-gray-300" : ""
                   } `}
                   onClick={() => handleItemClick("products")}
@@ -114,8 +126,8 @@ const Sidebar = ({ onItemClick }) => {
           </li>
           <hr className="my-4 border-gray-300" />
           <li
-            className={`p-4  flex items-center cursor-pointer rounded-lg transition-colors ${
-              activeItem === "inbox" ? "bg-gray-200" : ""
+            className={`p-4  flex hover:bg-gray-200 items-center cursor-pointer rounded-lg transition-colors ${
+              activeItem === "inbox" ? "bg-gray-300" : ""
             }`}
             onClick={() => handleItemClick("inbox")}
           >
@@ -123,18 +135,20 @@ const Sidebar = ({ onItemClick }) => {
             Inbox
           </li>
           <li
-            className={`p-4  flex items-center cursor-pointer rounded-lg transition-colors ${
-              activeItem === "profile" ? "bg-gray-200" : ""
+            className={`p-4  flex hover:bg-gray-200 items-center cursor-pointer rounded-lg transition-colors ${
+              activeItem === "profile" ? "bg-gray-300" : ""
             }`}
             onClick={() => handleItemClick("profile")}
           >
             <i className="bx bx-user-circle text-lg mr-3"></i>
             Profile
           </li>
-          <li className="p-4 hover:bg-gray-200 flex items-center cursor-pointer rounded-lg transition-colors">
-            <i className="bx bx-log-out text-lg mr-3"></i>
-            Log Out
-          </li>
+          <button className="w-full" onClick={handleLogout}>
+            <li className="p-4 hover:bg-gray-200 flex items-center cursor-pointer rounded-lg transition-colors">
+              <i className="bx bx-log-out text-lg mr-3"></i>
+              Log Out
+            </li>
+          </button>
         </ul>
       </nav>
     </div>

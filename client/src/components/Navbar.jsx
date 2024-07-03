@@ -5,7 +5,7 @@ import Cart from "./Cart";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const profile = JSON.parse(localStorage.getItem("profile"));
-  console.log(profile);
+  // console.log(profile);
 
   return (
     <>
@@ -56,6 +56,7 @@ const Navbar = () => {
           </div>
 
           {/* buttons */}
+          <NavLink to='/userProfile'> 
           <nav className="contents">
             <ul className="ml-4 xl:w-48 flex items-center justify-end">
               <li className="ml-2 lg:ml-4 relative inline-block">
@@ -115,6 +116,8 @@ const Navbar = () => {
               </li>
             </ul>
           </nav>
+          </NavLink>
+          
 
           {/* cart count */}
           <div className="ml-4 hidden sm:flex flex-col font-bold">
