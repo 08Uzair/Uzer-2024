@@ -5,12 +5,6 @@ export const FETCH_USER_ID = "FETCH_USER_ID";
 export const DELETE_USER = "DELETE_USER";
 export const LOGOUT = "LOGOUT";
 
-// ADMIN AUTH
-export const ADMIN_AUTH = "ADMIN_AUTH ";
-export const FETCH_ADMIN = "FETCH_ADMIN";
-export const FETCH_ADMIN_ID = "FETCH_ADMIN_ID";
-export const DELETE_ADMIN = "DELETE_ADMIN";
-export const ADMIN_LOGOUT = "ADMIN_LOGOUT";
 
 //  INBOX
 export const FETCH_INBOX = "FETCH_INBOX";

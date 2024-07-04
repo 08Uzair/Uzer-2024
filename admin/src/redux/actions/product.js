@@ -40,6 +40,7 @@ export const updateProduct = (id, updatedProduct) => async (dispatch) => {
   try {
     const { data } = await api.updateProducts(id, updatedProduct);
     dispatch({ type: UPDATE_PRODUCTS, payload: data });
+    toast.success("Updated Sucessfully");
   } catch (error) {
     console.log(error);
   }

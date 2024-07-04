@@ -10,8 +10,10 @@ export const signin = (newUser) => async (dispatch) => {
   try {
     const { data } = await api.signIn(newUser);
     dispatch({ type: AUTH, payload: data });
+    localStorage.setItem("itemName", "home");
+    toast.success("Login Sucessfully");
   } catch (error) {
-    return;
+    return toast.error("Login Failed");
   }
 };
 
@@ -44,7 +46,7 @@ export const getUserByID = (id) => async (dispatch) => {
 
 export const deleteUser = (id) => async (dispatch) => {
   try {
-    toast.success("User Delete Sucessfull");
+    toast.success("User Deleted Sucessfully")
     await api.deleteUser(id);
     dispatch({ type: DELETE_USER, payload: id });
   } catch (error) {

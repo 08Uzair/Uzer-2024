@@ -21,10 +21,10 @@ export default (products = [], action) => {
       return products.filter((product) => product._id !== action.payload._id);
 
     case UPDATE_PRODUCTS:
-      products.map((product) =>
+      return products.map((product) =>
         product._id === action.payload._id ? action.payload : product
       );
-      break;
+
     default:
       return products;
   }

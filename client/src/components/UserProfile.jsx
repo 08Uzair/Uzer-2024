@@ -82,11 +82,11 @@ const UserProfile = () => {
               <div className="px-6">
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
-                    <div className="relative">
+                    <div>
                       <img
                         alt="..."
                         src={user.avatar}
-                        className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+                        className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 w-32"
                       />
                     </div>
                   </div>
@@ -95,8 +95,9 @@ const UserProfile = () => {
                       <button
                         className="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                         type="button"
+                        onClick={handleLogout}
                       >
-                        Connect
+                        Log out
                       </button>
                     </div>
                   </div>
@@ -156,8 +157,8 @@ const UserProfile = () => {
                         giving it a warm, intimate feel with a solid groove
                         structure. An artist of considerable range.
                       </p>
-                      <a href="#pablo" className="font-normal text-pink-500">
-                        Show more
+                      <a href="/" className="font-normal text-pink-500">
+                        Back
                       </a>
                     </div>
                   </div>

@@ -1,10 +1,11 @@
 import React from "react";
 import { Gallery } from "../components/Gallery";
-import { ProductCard } from "../components/Products";
 import Top from "../components/Top";
 import { Footer } from "../components/Footer";
 import Label from "../components/Scroll";
 import Navbar from "../components/Navbar";
+import { ProductCard1 } from "../components/Products1";
+import { ProductCard2 } from "../components/Product2";
 
 const Home = () => {
   return (
@@ -12,9 +13,9 @@ const Home = () => {
       <Navbar />
       <div className="m-8">
         <Gallery />
-        <ProductCard />
+        <ProductCard2 />
         <Top />
-        <ProductCard />
+        <ProductCard1 />
         <Label />
         <Footer />
       </div>

@@ -6,14 +6,17 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { thunk } from "redux-thunk";
 import rootReducer from "./redux/reducers";
 import { ThemeProvider } from "@material-tailwind/react";
+import { BrowserRouter } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+      <ThemeProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );

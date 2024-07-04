@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/actions/products";
 import { NavLink } from "react-router-dom";
 
-export function ProductCard() {
+export function ProductCard2() {
   const productData = useSelector((state) => state?.products?.products);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,7 +22,7 @@ export function ProductCard() {
         Products
       </h1>
       <div className="flex flex-wrap ">
-        {productData?.map((item, index) => {
+        {productData?.slice(0, 6)?.map((item, index) => {
           return (
             <>
               <NavLink to={`/singleProduct/${item._id}`}>

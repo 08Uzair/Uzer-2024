@@ -14,13 +14,43 @@ export const signin = (newUser) => async (dispatch) => {
 };
 
 export const signUp = (newUser) => async (dispatch) => {
+  // Validation for empty fields
+  const {
+    email,
+    password,
+    fname,
+    lname,
+    country,
+    state,
+    city,
+    pinCode,
+    number,
+    address1,
+    address2,
+  } = newUser;
+  if (
+    !email ||
+    !password ||
+    !fname ||
+    !lname ||
+    !country ||
+    !state ||
+    !city ||
+    !pinCode ||
+    !number ||
+    !address1 ||
+    !address2
+  ) {
+    toast.error("Please fill all the fields");
+    return;
+  }
+
   try {
     const { data } = await api.signUp(newUser);
     dispatch({ type: AUTH, payload: data });
-    toast.success("Registered Sucessfully");
+    toast.success("Registered Successfully");
   } catch (error) {
-    toast.error("Registeration Failed");
-
+    toast.error("Registration Failed");
     console.log(error);
   }
 };

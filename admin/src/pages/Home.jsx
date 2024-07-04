@@ -3,7 +3,7 @@ export default function Home() {
   const [userData, setUserData] = useState();
   useEffect(() => {
     const profile = JSON.parse(localStorage.getItem("profile"));
-    setUserData(profile?.admins[0]);
+    setUserData(profile?.result);
     console.log(userData);
   }, []);
   return (
