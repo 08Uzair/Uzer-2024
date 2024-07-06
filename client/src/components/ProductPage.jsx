@@ -1,93 +1,110 @@
-import React, { useEffect } from "react";
+import { useState, useEffect } from "react";
+import Navbar from "../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductByID, getProducts } from "../redux/actions/products";
+import { getProductByID } from "../redux/actions/products";
 import { useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import Navbar from "./Navbar";
+// import Recomended from "./Recomended";
 
-const ProductPage = () => {
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+export default function ProductPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const singleProduct = useSelector((state) => state?.products?.[0]);
   useEffect(() => {
     dispatch(getProductByID(id));
   }, [dispatch, id]);
-  const recommendedProducts = useSelector((state) =>
-    state?.products?.products?.slice(3, 6)
-  );
   console.log(singleProduct);
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
-  // console.log(recommendedProducts);
-  function truncateString(input, length) {
-    if (input.length > length) {
-      return input.slice(0, length) + "...";
-    }
-  }
+
+  const reviews = { href: "#", average: singleProduct?.rank, totalCount: 117 };
 
   return (
     <>
       <Navbar />
-      <div className="max-w-6xl mx-auto p-6 mt-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="flex justify-center h-20">
+      <div className="bg-white">
+        <div className="pt-6 ">
+          {/* Product info */}
+          <div className="flex items-center justify-center">
             <img
+              style={{ width: "18.5rem", height: "18.5rem" }}
               src={singleProduct?.image}
-              alt={singleProduct?.name}
-              className="rounded-lg shadow-lg"
             />
           </div>
-          <div>
-            <h1 className="text-4xl font-bold mb-4">{singleProduct?.name}</h1>
-            <p className="text-gray-700 mb-4">{singleProduct?.description}</p>
-            <div className="text-2xl font-bold mb-4">
-              ₹ {singleProduct?.price}
+          <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+            <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                {singleProduct?.name}
+              </h1>
             </div>
-            <div className="mb-4">
-              <span className="block font-semibold mb-2">Size:</span>
-              <div className="flex gap-2">
+
+            {/* Options */}
+            <div className="mt-4 lg:row-span-3 lg:mt-0">
+              <h2 className="sr-only">singleProduct information</h2>
+              <p className="text-3xl tracking-tight text-gray-900">
+                ₹ {singleProduct?.price}
+              </p>
+
+              {/* Reviews */}
+              <div className="mt-6">
+                <h3 className="sr-only">Reviews</h3>
+                <div className="flex items-center">
+                  <div className="flex items">
+                    {[0, 1, 2, 3, 4]?.map((rating) => (
+                      <i
+                        key={rating}
+                        className={classNames(
+                          reviews?.average > rating
+                            ? "bx bxs-star text-gray-900"
+                            : "bx bx-star text-gray-200",
+                          "h-5 w-5 flex-shrink-0"
+                        )}
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </div>
+                  <p className="sr-only">{reviews?.average} out of 5 stars</p>
+                  <a
+                    href={reviews?.href}
+                    className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                  >
+                    {reviews?.totalCount} reviews
+                  </a>
+                </div>
+              </div>
+
+              <form className="mt-10">
+                {/* Colors */}
+                <div>
+                  <h3 className="text-sm font-medium text-gray-900">Color</h3>{" "}
+                  {singleProduct?.color}
+                </div>
                 <button
-                  key={singleProduct?.size}
-                  className="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-100 transition"
+                  type="submit"
+                  className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                  {singleProduct?.size}
+                  Add to bag
                 </button>
+              </form>
+            </div>
+
+            <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
+              {/* Description and details */}
+              <div>
+                <h3 className="sr-only">Description</h3>
+
+                <div className="space-y-6">
+                  <p className="text-base text-gray-900">
+                    {singleProduct?.description}
+                  </p>
+                </div>
               </div>
             </div>
-            <button className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition">
-              Add to Cart
-            </button>
-            <p className="text-gray-700 mt-8">{singleProduct?.description}</p>
           </div>
         </div>
-
-        {/* <div className="mt-12">
-          <h2 className="text-2xl font-bold mb-4">You May Also Like</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {recommendedProducts?.map((item, index) => (
-              <div className="border border-gray-200 p-4 rounded-lg shadow-sm">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-40 object-cover mb-4 rounded-lg"
-                />
-                <h3 className="text-lg font-semibold mb-2">
-                  {truncateString(item.name, 50)}
-                </h3>
-                <div className="text-gray-700">₹ {item.price}</div>
-                <NavLink to={`/singleProduct/${item._id}`}>
-                  <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                    View Details
-                  </button>
-                </NavLink>
-              </div>
-            ))}
-          </div>
-        </div> */}
       </div>
+      {/* <Recomended /> */}
     </>
   );
-};
-
-export default ProductPage;
+}

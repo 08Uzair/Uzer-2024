@@ -7,6 +7,7 @@ import ProductPage from "./components/ProductPage";
 import UserProfile from "./components/UserProfile";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CartPage from "./components/CartPage";
 const App = () => {
   const profile = JSON.parse(localStorage.getItem("profile"));
   let isAuthenticated;
@@ -33,7 +34,14 @@ const App = () => {
               isAuthenticated ? <UserProfile /> : <Navigate to="/auth" />
             }
           />
+          <Route
+            path="/cart"
+            element={
+              isAuthenticated ? <CartPage /> : <Navigate to="/auth" />
+            }
+          />
         </Routes>
+        
       </BrowserRouter>
     </div>
   );

@@ -91,11 +91,11 @@ const ProductsData = () => {
                 <h5 className="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
                   Products Management
                 </h5>
-                <p className="block mt-1 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
+                <p className="block mt-1 font-sans text-base antialiased font-normal leading-relaxed text-gray-700 mb-8">
                   Total Products : {productData?.length}
                 </p>
               </div>
-              <div className="flex flex-col gap-2 shrink-0 sm:flex-row">
+              <div className="flex flex-col gap-2 shrink-0 sm:flex-row mb-4">
                 <button
                   className="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                   type="button"

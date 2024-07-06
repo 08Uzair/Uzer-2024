@@ -15,7 +15,7 @@ export default (products = [], action) => {
       return [...products, action.payload];
 
     case FETCH_PRODUCTS_ID:
-      return { ...products, product: action.payload };
+      return [action.payload];
 
     case DELETE_PRODUCTS:
       return products.filter((product) => product._id !== action.payload._id);
@@ -24,7 +24,7 @@ export default (products = [], action) => {
       return products.map((product) =>
         product._id === action.payload._id ? action.payload : product
       ); // Ensure the state is returned
-
+      break;
     default:
       return products;
   }

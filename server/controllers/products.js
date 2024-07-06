@@ -14,8 +14,8 @@ export const addProduct = async (req, res) => {
     discount,
     rank,
     image,
+    category,
   } = req.body;
-  console.log(req.body);
   const saveData = new product({
     name,
     description,
@@ -26,8 +26,11 @@ export const addProduct = async (req, res) => {
     discount,
     rank,
     image,
+    category,
     createdAt: new Date().toISOString(),
   });
+  console.log(saveData);
+
   try {
     await saveData.save();
     res.status(200).json({ message: "Added Sucessfully" });
@@ -77,6 +80,7 @@ export const updateProduct = async (req, res) => {
     discount,
     rank,
     image,
+    category,
     createdAt,
   } = req.body;
   try {
@@ -90,6 +94,7 @@ export const updateProduct = async (req, res) => {
       discount,
       rank,
       image,
+      category,
       createdAt,
     };
     const updatedProduct = await product.findByIdAndUpdate(id, updatedata, {
@@ -134,6 +139,7 @@ export const searchProduct = async (req, res) => {
         { description: { $regex: searchTerm, $options: "i" } }, // Case-insensitive search for description
         { color: { $regex: searchTerm, $options: "i" } }, // Case-insensitive search for color
         { price: { $regex: searchTerm, $options: "i" } }, // Case-insensitive search for price
+        { category: { $regex: searchTerm, $options: "i" } }, // Case-insensitive search for price
       ],
     });
 

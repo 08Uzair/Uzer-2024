@@ -30,3 +30,7 @@ export const fetchProductsById = (id) => API.get(`/products/${id}`);
 export const deleteProducts = (id) => API.delete(`/products/${id}`);
 export const updateProducts = (id, updatedProduct) =>
   API.put(`/products/${id}`, updatedProduct);
+
+// CATEGORY
+export const fetchCategories = () => API.get("/category/");
+export const fetchCategoryById = (id) => API.get(`/category/${id}`);

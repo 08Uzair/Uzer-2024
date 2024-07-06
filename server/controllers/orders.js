@@ -1,19 +1,19 @@
-import { order } from "../models/orders";
+import { order } from "../models/orders.js";
 
 // Add Product
 export const addOrder = async (req, res) => {
-  // console.log(req.body);
   // const author = req.userId;
-  console.log(req.body);
-  const { quantity, itemsPrice, taxPrice, totalPrice } = req.body;
-  console.log(req.body);
+  const { quantity, itemsPrice, taxPrice, totalPrice, paymentInfo } = req.body;
+  console.log(paymentInfo);
   const saveData = new order({
     quantity,
     itemsPrice,
     taxPrice,
     totalPrice,
+    paymentInfo,
     createdAt: new Date().toISOString(),
   });
+  console.log(saveData);
   try {
     await saveData.save();
     res.status(200).json({ message: "Order Added Sucessfully" });
@@ -22,3 +22,4 @@ export const addOrder = async (req, res) => {
     res.status(500).json({ message: `${error}` });
   }
 };
+

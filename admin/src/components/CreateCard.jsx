@@ -1,9 +1,16 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createProducts } from "../redux/actions/product";
+import { getCategory } from "../redux/actions/category";
 
 const CreateCard = () => {
+  const dispatch = useDispatch();
+  const cat = useSelector((state) => state?.category);
+  console.log(cat);
+  useEffect(() => {
+    dispatch(getCategory());
+  }, [dispatch]);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -14,6 +21,7 @@ const CreateCard = () => {
     discount: "",
     rank: "",
     image: "",
+    category: "", // Add category to the formData
   });
 
   const [page, setPage] = useState(0);
@@ -33,10 +41,10 @@ const CreateCard = () => {
     { name: "discount", type: "number", label: "Discount" },
     { name: "rank", type: "number", label: "Rank", required: true },
     { name: "image", type: "text", label: "Image URL", required: true },
+    { name: "category", type: "dropdown", label: "Category", required: true },
   ];
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,18 +52,16 @@ const CreateCard = () => {
       ...formData,
       [name]: value,
     });
-    // console.log(value);
   };
 
   const handleCreatePost = async (e) => {
     e.preventDefault();
     try {
       await dispatch(createProducts(formData));
-        navigate("/");
+      navigate("/");
     } catch (error) {
       console.error("There was an error creating the product!", error);
     }
-    // console.log(formData);
   };
 
   const nextPage = () => {
@@ -90,6 +96,22 @@ const CreateCard = () => {
             required={field.required}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           ></textarea>
+        ) : field.type === "dropdown" ? (
+          <select
+            id={field.name}
+            name={field.name}
+            value={formData[field.name]}
+            onChange={handleChange}
+            required={field.required}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          >
+            <option value="">Select a category</option>
+            {cat?.map((item, index) => (
+              <option key={index} value={item?._id}>
+                {item?.name}
+              </option>
+            ))}
+          </select>
         ) : (
           <input
             type={field.type}

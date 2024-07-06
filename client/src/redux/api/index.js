@@ -24,3 +24,10 @@ export const fetchProducts = () => API.get("/products");
 export const fetchProductsById = (id) => API.get(`/products/${id}`);
 export const deleteProducts = (id) => API.delete(`/products/${id}`);
 export const updateProducts = (id) => API.put(`/products/${id}`);
+
+// CART
+export const addCartProducts = (newProducts) => API.post("/cart", newProducts);
+export const fetchCartProducts = () => API.get("/cart");
+export const fetchCartProductsById = (id) => API.get(`/cart/${id}`);
+export const deleteCartProducts = (id) => API.delete(`/cart/${id}`);
+export const updateCartProducts = ( product, user) => API.put(`/cart/${id}`,);
