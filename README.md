@@ -2,7 +2,7 @@
 
 🌐 BASE_URL = http://localhost:8000/api/v1/
 
-👤 ## Users
+ ## Users
 ➡️ GET : `/users`
 
 ➡️ DELETE : `/users/:userId`
@@ -11,7 +11,7 @@
 
 ➡️ POST : `/users/signUp`
 
-🤖 ## Products
+## Products
 ➡️ GET :`/products`
 
 ➡️ POST :`/products`
