@@ -16,12 +16,14 @@ const Auth = () => {
   const [number, setNumber] = useState("");
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
   const handelSignUp = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const newUser = {
@@ -39,13 +41,18 @@ const Auth = () => {
         address2,
       };
       await dispatch(signUp(newUser));
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log(error);
+    } finally {
+      setLoading(false);
     }
 
     window.location.reload();
   };
   const handleSignIn = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const user = {
@@ -54,10 +61,14 @@ const Auth = () => {
       };
       console.log(user);
       await dispatch(signin(user));
-     
+
       navigate("/");
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -86,6 +97,7 @@ const Auth = () => {
             handleSignIn={handleSignIn}
             setEmail={setEmail}
             setPassword={setPassword}
+            loading={loading}
           />
         ) : (
           <SignUpForm
@@ -102,6 +114,7 @@ const Auth = () => {
             setNumber={setNumber}
             setAddress1={setAddress1}
             setAddress2={setAddress2}
+            loading={loading}
           />
         )}
       </div>
@@ -109,7 +122,7 @@ const Auth = () => {
   );
 };
 
-const SignInForm = ({ handleSignIn, setEmail, setPassword }) => (
+const SignInForm = ({ handleSignIn, setEmail, setPassword, loading }) => (
   <form onSubmit={handleSignIn}>
     <div className="mb-4">
       <label
@@ -145,8 +158,9 @@ const SignInForm = ({ handleSignIn, setEmail, setPassword }) => (
       <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
         type="submit"
+        disabled={loading}
       >
-        Sign In
+        {loading ? "Signing in..." : "Signin"}
       </button>
       <a
         className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"

@@ -43,7 +43,10 @@ export const addProduct = async (req, res) => {
 //Get Product
 export const getProducts = async (req, res) => {
   try {
-    const products = await product.find().sort({ createdAt: -1 });
+    const products = await product
+      .find()
+      .populate("category")
+      .sort({ createdAt: -1 });
     res.status(200).json({ products });
   } catch (error) {
     console.log(error);
@@ -148,3 +151,5 @@ export const searchProduct = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Filter Product

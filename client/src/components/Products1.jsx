@@ -47,11 +47,15 @@ export function ProductCard1() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold mb-12 mt-12 text-center w-full">
-        Products
-      </h1>
+      <div className="flex items-center justify-between mr-16 ml-16">
+        <h1 className="text-3xl font-bold mb-12 mt-12 ">Featured Products</h1>
+        <p className="text-md text-sky-400 ">
+          <a href="/allProducts">View more</a>
+        </p>
+      </div>
+
       <div className="flex flex-wrap">
-        {productData?.slice(6, productData?.length)?.map((item, index) => {
+        {productData?.slice(6, 12)?.map((item, index) => {
           return (
             <div
               key={index}

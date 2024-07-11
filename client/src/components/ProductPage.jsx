@@ -16,7 +16,7 @@ export default function ProductPage() {
   useEffect(() => {
     dispatch(getProductByID(id));
   }, [dispatch, id]);
-  console.log(singleProduct);
+  // console.log(singleProduct);
 
   const reviews = { href: "#", average: singleProduct?.rank, totalCount: 117 };
 
@@ -28,7 +28,7 @@ export default function ProductPage() {
           {/* Product info */}
           <div className="flex items-center justify-center">
             <img
-              style={{ width: "18.5rem", height: "18.5rem" }}
+              style={{ width: "18.5rem", height: "21rem" }}
               src={singleProduct?.image}
             />
           </div>
@@ -77,9 +77,20 @@ export default function ProductPage() {
               <form className="mt-10">
                 {/* Colors */}
                 <div>
-                  <h3 className="text-sm font-medium text-gray-900">Color</h3>{" "}
-                  {singleProduct?.color}
+                  <h3 className="text-sm font-medium text-gray-900">
+                    Color: {singleProduct?.color?.toUpperCase()}
+                  </h3>
+                  <div
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      border: "1px solid black",
+                      borderRadius: "50%",
+                      background: singleProduct?.color || "transparent",
+                    }}
+                  ></div>
                 </div>
+
                 <button
                   type="submit"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

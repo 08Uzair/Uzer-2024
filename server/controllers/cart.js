@@ -31,19 +31,48 @@ export const getCartProducts = async (req, res) => {
 };
 
 // Get Cart Product by Id
-export const getCartProductById = async (req, res) => {
-  const { id } = req.params;
+export const getCartProductByUserId = async (req, res) => {
+  const { userId } = req.params;
   try {
     const cartProduct = await cart
-      .findById(id)
+      .find({ user: userId })
       .populate("product")
-      .populate("user");
+      .populate("user")
+      .sort({ createdAt: -1 });
     if (!cartProduct) {
       return res.status(404).json({ message: "Product Not Found in Cart" });
     }
     res.status(200).json(cartProduct);
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+// Delete Cart Product by User Id
+export const deleteCartProductByUserId = async (req, res) => {
+  const { userId } = req.params;
+  console.log("yes");
+  try {
+    const cartProducts = await cart.find({ user: userId });
+    if (cartProducts.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No products found in cart for this user" });
+    }
+
+    // More efficient deletion of all products for the user
+    await cart.deleteMany({ user: userId });
+
+    res
+      .status(200)
+      .json({ message: "Products deleted successfully from cart" });
+  } catch (error) {
+    res;
+    console
+      .log(error)
+
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
   }
 };
 

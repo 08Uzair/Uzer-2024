@@ -2,16 +2,29 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/actions/products";
 import { NavLink } from "react-router-dom";
-import { createCartProducts } from "../redux/actions/cart";
+import {
+  createCartProducts,
+  getCartProductByUserID,
+} from "../redux/actions/cart";
 import { toast } from "react-toastify";
 
 export function ProductCard2() {
   const productData = useSelector((state) => state?.products?.products);
-  const dispatch = useDispatch();
+  const [userData, setUserData] = useState();
 
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
+  useEffect(() => {
+    const profile = JSON.parse(localStorage.getItem("profile"))?.result;
+    setUserData(profile);
+  }, []);
+  // const cartProducts = useSelector((state) => state?.cart);
+  // console.log(cartProducts);
+  // useEffect(() => {
+  //   dispatch(getCartProductByUserID(userData._id));
+  // }, [dispatch]);
 
   function truncateString(input, length) {
     if (input.length > length) {
@@ -19,13 +32,20 @@ export function ProductCard2() {
     }
     return input;
   }
+  // function allReadyAdded(itemId) {
+  //   cartProducts.map((item, index) => {
+  //     if (item._id === itemId) {
+  //       toast.warn("Product is Allready Added");
+  //     }
+  //   });
+  // }
 
-  const [userData, setUserData] = useState();
+  // const [userData, setUserData] = useState();
 
-  useEffect(() => {
-    const profile = JSON.parse(localStorage.getItem("profile"))?.result;
-    setUserData(profile);
-  }, []);
+  // useEffect(() => {
+  //   const profile = JSON.parse(localStorage.getItem("profile"))?.result;
+  //   setUserData(profile);
+  // }, []);
 
   const handleAddToCart = async (productId) => {
     if (!userData) {
@@ -49,10 +69,10 @@ export function ProductCard2() {
   return (
     <>
       <h1 className="text-3xl font-bold mb-12 mt-12 text-center w-full">
-        Products
+        Top Products
       </h1>
       <div className="flex flex-wrap">
-        {productData?.slice(0, 6)?.map((item, index) => {
+        {productData?.slice(0, 3)?.map((item, index) => {
           return (
             <div
               key={index}
@@ -80,7 +100,10 @@ export function ProductCard2() {
                 </span>
                 <button
                   className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
-                  onClick={() => handleAddToCart(item._id)}
+                  onClick={() => {
+                    handleAddToCart(item._id);
+                    // handleAddToCart(item._id), allReadyAdded(item._id);
+                  }}
                 >
                   Add to Cart
                 </button>

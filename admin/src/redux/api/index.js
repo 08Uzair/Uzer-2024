@@ -17,6 +17,11 @@ export const deleteUser = (id) => API.delete(`/user/${id}`);
 export const signUp = (newUser) => API.post("/user/signUp/", newUser);
 export const signIn = (newUser) => API.post("/user/signIn/", newUser);
 
+// ORDERS
+export const fetchOrders = () => API.get("/orders");
+export const fetchOrdersById = (userId) => API.get(`/orders/${userId}`);
+export const deleteOrders = (id) => API.delete(`/orders/${id}`);
+
 // Message
 export const fetchInbox = () => API.get("/inbox");
 export const fetchInboxById = (id) => API.get(`/inbox/${id}`);
@@ -34,3 +39,7 @@ export const updateProducts = (id, updatedProduct) =>
 // CATEGORY
 export const fetchCategories = () => API.get("/category/");
 export const fetchCategoryById = (id) => API.get(`/category/${id}`);
+
+// STATUS
+export const fetchStatus = () => API.get("/status/");
+export const fetchStatusById = (id) => API.get(`/status/${id}`);

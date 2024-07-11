@@ -2,10 +2,11 @@ import { toast } from "react-toastify";
 import * as api from "../api";
 import {
   FETCH_CART_PRODUCTS,
-  FETCH_CART_PRODUCTS_ID,
   UPDATE_CART_PRODUCTS,
   DELETE_CART_PRODUCTS,
   CREATE_CART_PRODUCT,
+  FETCH_CART_PRODUCTS_BY_USER_ID,
+  DELETE_CART_PRODUCT_BY_USER_ID,
 } from "../constants/actionTypes";
 
 export const getCartProducts = () => async (dispatch) => {
@@ -30,11 +31,11 @@ export const createCartProducts = (product) => async (dispatch) => {
   }
 };
 
-export const getCartProductByID = (id) => async (dispatch) => {
+export const getCartProductByUserID = (userId) => async (dispatch) => {
   try {
-    const { data } = await api.fetchCartProductsById(id);
-    console.log("Fetched Cart Product By ID:", data); // Debugging log
-    dispatch({ type: FETCH_CART_PRODUCTS_ID, payload: data });
+    const { data } = await api.fetchCartProductsByUserId(userId);
+    // console.log("Fetched Cart Product By ID:", data); // Debugging log
+    dispatch({ type: FETCH_CART_PRODUCTS_BY_USER_ID, payload: data });
   } catch (error) {
     console.log(error);
   }
@@ -61,3 +62,12 @@ export const deleteCartProduct = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+// export const CartProductDeletedByUserId = (userId) => async (dispatch) => {
+//   try {
+//     await api.deleteCartProductByUserId(userId);
+//     console.log("Deleted Cart Product ID:", userId); // Debugging log
+//     dispatch({ type: DELETE_CART_PRODUCT_BY_USER_ID, payload: { userId } });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
