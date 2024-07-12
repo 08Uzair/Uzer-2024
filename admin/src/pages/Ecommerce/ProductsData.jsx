@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/actions/product";
 import { NavLink, useNavigate } from "react-router-dom";
+import Loader from "../../utility/Loader";
 function truncateString(input, length) {
   if (input.length > length) {
     return input.slice(0, length) + "...";
@@ -80,7 +81,9 @@ const ProductsData = () => {
     setSelectedProduct(null);
     setIsModalOpen(false);
   };
-
+  if (!productData) {
+    return <Loader />;
+  }
   return (
     <>
       <div style={{ width: "85%", height: "100vh" }}>

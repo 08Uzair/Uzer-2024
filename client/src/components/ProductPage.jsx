@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductByID } from "../redux/actions/products";
 import { useParams } from "react-router-dom";
 import { createCartProducts } from "../redux/actions/cart";
-import Loader from "./Loader";
+import Loader from "../utility/Loader";
 // import Recomended from "./Recomended";
 
 function classNames(...classes) {

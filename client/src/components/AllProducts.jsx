@@ -7,7 +7,7 @@ import {
   getCartProductByUserID,
 } from "../redux/actions/cart";
 import { toast } from "react-toastify";
-import Loader from "./Loader";
+import Loader from "../utility/Loader";
 import { Footer } from "./Footer";
 
 export function AllProducts() {

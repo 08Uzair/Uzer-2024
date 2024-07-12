@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, getUsers } from "../../redux/actions/auth";
+import Loader from "../../utility/Loader";
 
 const UserManagement = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,9 @@ const UserManagement = () => {
     dispatch(deleteUser(id));
     window.location.reload();
   };
+  if (!data) {
+    return <Loader />;
+  }
   return (
     <div style={{ width: "85%", height: "100vh" }}>
       <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">

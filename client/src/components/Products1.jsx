@@ -4,7 +4,7 @@ import { getProducts } from "../redux/actions/products";
 import { NavLink } from "react-router-dom";
 import { createCartProducts } from "../redux/actions/cart";
 import { toast } from "react-toastify";
-import Loader from "./Loader";
+import Loader from "../utility/Loader";
 
 export function ProductCard1() {
   const productData = useSelector((state) => state?.products?.products);

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteOrder, getOrders } from "../../redux/actions/orders";
 import { getStatus } from "../../redux/actions/status";
 import { toast } from "react-toastify";
+import Loader from "../../utility/Loader";
 
 const OrdersData = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,9 @@ const OrdersData = () => {
   const handleMouseLeave = () => {
     setShowPopoverIndex(null);
   };
-
+  if (!data) {
+    return <Loader />;
+  }
   return (
     <div style={{ width: "85%", height: "100vh" }}>
       <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">

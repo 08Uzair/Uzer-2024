@@ -9,7 +9,7 @@ import {
 import Navbar from "./Navbar";
 import { NavLink, useNavigate } from "react-router-dom";
 import { addOrders, createOrder } from "../redux/actions/orders";
-import Loader from "./Loader";
+import Loader from "../utility/Loader";
 import { Footer } from "./Footer";
 import EmptyCart from "./EmptyCart";
 

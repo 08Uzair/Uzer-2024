@@ -7,7 +7,7 @@ import {
   getCartProductByUserID,
 } from "../redux/actions/cart";
 import { toast } from "react-toastify";
-import Loader from "./Loader";
+import Loader from "../utility/Loader";
 
 export function ProductCard2() {
   const productData = useSelector((state) => state?.products?.products);
