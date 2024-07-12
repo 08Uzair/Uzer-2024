@@ -186,6 +186,7 @@ const SignUpForm = ({
   setNumber,
   setAddress1,
   setAddress2,
+  loading,
 }) => {
   const [step, setStep] = useState(1);
 
@@ -402,8 +403,9 @@ const SignUpForm = ({
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
               type="submit"
+              disabled={loading}
             >
-              Sign Up
+              {loading ? "Signing up..." : "Signup"}
             </button>
           </div>
         </>

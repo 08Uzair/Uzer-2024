@@ -4,6 +4,7 @@ import { getProducts } from "../redux/actions/products";
 import { NavLink } from "react-router-dom";
 import { createCartProducts } from "../redux/actions/cart";
 import { toast } from "react-toastify";
+import Loader from "./Loader";
 
 export function ProductCard1() {
   const productData = useSelector((state) => state?.products?.products);
@@ -44,13 +45,15 @@ export function ProductCard1() {
       console.log(error);
     }
   };
-
+  if (!productData) {
+    return <Loader />;
+  }
   return (
     <>
       <div className="flex items-center justify-between mr-16 ml-16">
         <h1 className="text-3xl font-bold mb-12 mt-12 ">Featured Products</h1>
         <p className="text-md text-sky-400 ">
-          <a href="/allProducts">View more</a>
+          <NavLink to="/allProducts">View more</NavLink>
         </p>
       </div>
 

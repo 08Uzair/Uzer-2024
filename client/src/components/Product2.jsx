@@ -7,6 +7,7 @@ import {
   getCartProductByUserID,
 } from "../redux/actions/cart";
 import { toast } from "react-toastify";
+import Loader from "./Loader";
 
 export function ProductCard2() {
   const productData = useSelector((state) => state?.products?.products);
@@ -14,6 +15,7 @@ export function ProductCard2() {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(getProducts());
   }, [dispatch]);
   useEffect(() => {
@@ -65,7 +67,9 @@ export function ProductCard2() {
       console.log(error);
     }
   };
-
+if(!productData){
+  return<Loader/>
+}
   return (
     <>
       <h1 className="text-3xl font-bold mb-12 mt-12 text-center w-full">

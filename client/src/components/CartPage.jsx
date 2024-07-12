@@ -9,6 +9,9 @@ import {
 import Navbar from "./Navbar";
 import { NavLink, useNavigate } from "react-router-dom";
 import { addOrders, createOrder } from "../redux/actions/orders";
+import Loader from "./Loader";
+import { Footer } from "./Footer";
+import EmptyCart from "./EmptyCart";
 
 const CartItems = () => {
   const cartProducts = useSelector((state) => state?.cart);
@@ -42,7 +45,7 @@ const CartItems = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteCartProduct(id));
-    window.location.reload();
+    // window.location.reload();
     // console.log("delete");
   };
   // const handleDeleteAll = () => {
@@ -76,7 +79,7 @@ const CartItems = () => {
 
   function truncateString(input, length) {
     if (input?.length > length) {
-      return input.slice(0, length) + "...";
+      return input?.slice(0, length) + "...";
     }
     return input;
   }
@@ -87,7 +90,7 @@ const CartItems = () => {
   );
   const subtotalPrice = products.reduce(
     (acc, product) =>
-      acc + product.product.price * (quantities[product._id] || 1),
+      acc + product?.product?.price * (quantities[product?._id] || 1),
     0
   );
 
@@ -112,13 +115,19 @@ const CartItems = () => {
 
     try {
       await dispatch(addOrders(newOrder));
+      window.scrollTo(0, 0);
       console.log("Added Order:", newOrder);
       navigate("/paymentSucess");
     } catch (error) {
       console.log(error);
     }
   };
-
+  if (!cartProducts) {
+    return <Loader />;
+  }
+  if (cartProducts.length === 0) {
+    return <EmptyCart />;
+  }
   return (
     <>
       <Navbar total={totalPrice} />
@@ -229,6 +238,7 @@ const CartItems = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

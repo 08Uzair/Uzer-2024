@@ -42,7 +42,7 @@ const UserProfile = () => {
   return (
     <>
       <Navbar />
-      <main style={{ marginTop: "14rem" }} className="profile-page ">
+      <main style={{ marginTop: "17rem" }} className="profile-page ">
         <section className="relative block h-500-px">
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"

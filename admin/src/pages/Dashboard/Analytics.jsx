@@ -3,6 +3,7 @@ import Chart from "chart.js";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/actions/product";
 import { getUsers } from "../../redux/actions/auth";
+import { getOrders } from "../../redux/actions/orders";
 
 const setupSalesChart = (ctx) => {
   new Chart(ctx, {
@@ -60,6 +61,14 @@ const Analytics = () => {
   const productChartRef = useRef(null);
   const userChartRef = useRef(null);
   const dispatch = useDispatch();
+
+  const data = useSelector((state) => state?.orders);
+  console.log(data);
+  useEffect(() => {
+    dispatch(getOrders());
+    window.scrollTo(0, 0);
+  }, [dispatch]);
+
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);

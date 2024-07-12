@@ -25,7 +25,7 @@ export const createCartProducts = (product) => async (dispatch) => {
     console.log("Created Cart Product:", data); // Debugging log
     toast.success("Added to Cart Successfully");
     dispatch({ type: CREATE_CART_PRODUCT, payload: data });
-    window.location.reload();
+    // window.location.reload();
   } catch (error) {
     console.log(error);
   }

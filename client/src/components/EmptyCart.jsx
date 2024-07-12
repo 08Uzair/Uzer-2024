@@ -2,11 +2,7 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 const EmptyCart = () => {
   const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate("/auth");
-    window.location.reload();
-  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="text-center">
@@ -22,7 +18,7 @@ const EmptyCart = () => {
         </h1>
         <p className="text-lg text-gray-700 mb-6">Buy A New Product</p>
         <div>
-          <button className="m-4" onClick={handleLogout}>
+          <button className="m-4">
             <NavLink
               to="/allProducts"
               className="inline-block px-6 py-3 text-white bg-gray-400 hover:bg-gray-500 rounded-lg border-slate-950 text-center"

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/actions/products";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   createCartProducts,
   getCartProductByUserID,
 } from "../redux/actions/cart";
 import { toast } from "react-toastify";
+import Loader from "./Loader";
+import { Footer } from "./Footer";
 
 export function AllProducts() {
   const [open, setOpen] = useState(false);
@@ -15,7 +17,15 @@ export function AllProducts() {
   const profile = JSON.parse(localStorage.getItem("profile"));
   const cartProductData = useSelector((state) => state?.cart);
   const dispatch = useDispatch();
-  // console.log(cartProductData);
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+  useEffect(() => {
+    const category = queryParams.get("category");
+    if (category !== null) {
+      setQuery(category.toLowerCase());
+    }
+    console.log(category);
+  }, [queryParams]);
   useEffect(() => {
     dispatch(getCartProductByUserID(userData?._id));
   }, [dispatch, userData]);
@@ -25,6 +35,7 @@ export function AllProducts() {
 
   useEffect(() => {
     dispatch(getProducts());
+    window.scrollTo(0, 0);
   }, [dispatch]);
 
   function truncateString(input, length) {
@@ -58,7 +69,9 @@ export function AllProducts() {
       console.log(error);
     }
   };
-
+  if (!productData) {
+    return <Loader />;
+  }
   return (
     <>
       <header style={{ width: "100%", top: "0rem" }} className="bg-white fixed">
@@ -167,8 +180,8 @@ export function AllProducts() {
           ?.filter(
             (item) =>
               item?.name?.toLowerCase()?.includes(query) ||
-              item?.description?.toLowerCase()?.includes(query) ||
-              item?.category?.name?.toLowerCase()?.includes(query)
+              item?.category?.name?.toLowerCase()?.includes(query) ||
+              item?.description?.toLowerCase()?.includes(query)
           )
           ?.map((item, index) => {
             return (
@@ -207,6 +220,7 @@ export function AllProducts() {
             );
           })}
       </div>
+      <Footer />
     </>
   );
 }
