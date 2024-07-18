@@ -10,7 +10,7 @@ export default function Home() {
     <div style={{ width: "85%", height: "100vh", overflow: "hidden" }}>
       <div className="bg-white">
         <div className="relative isolate px-6 pt-14 lg:px-8">
-          <div
+          <div 
             className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl "
             aria-hidden="true"
           >

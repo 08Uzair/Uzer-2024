@@ -6,6 +6,7 @@ const Auth = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,14 +19,19 @@ const Auth = () => {
         email,
         password,
       };
-      
+
       console.log(user);
       await dispatch(signin(user));
+      setLoading(false);
       navigate("/");
       window.location.reload();
     } catch (error) {
+      setLoading(false);
       console.log(error);
+    } finally {
+      setLoading(false);
     }
+    window.location.reload();
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -44,13 +50,14 @@ const Auth = () => {
           handleSignIn={handleSignIn}
           setEmail={setEmail}
           setPassword={setPassword}
+          loading={loading}
         />
       </div>
     </div>
   );
 };
 
-const SignInForm = ({ handleSignIn, setEmail, setPassword }) => (
+const SignInForm = ({ handleSignIn, setEmail, loading, setPassword }) => (
   <form onSubmit={handleSignIn}>
     <div className="mb-4">
       <label
@@ -85,9 +92,10 @@ const SignInForm = ({ handleSignIn, setEmail, setPassword }) => (
     <div className="flex items-center justify-between">
       <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+        disabled={loading}
         type="submit"
       >
-        Sign In
+        {loading ? "Signing in..." : "Signin"}
       </button>
       <a
         className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"

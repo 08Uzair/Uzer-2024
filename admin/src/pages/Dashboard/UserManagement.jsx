@@ -12,7 +12,7 @@ const UserManagement = () => {
     window.scrollTo(0, 0);
   }, [dispatch]);
 
-  const handleDelete = (id) => {
+  const handleDelete = (id) => { 
     dispatch(deleteUser(id));
     window.location.reload();
   };

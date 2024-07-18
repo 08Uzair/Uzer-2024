@@ -1,5 +1,7 @@
 import axios from "axios";
-const API = axios.create({ baseURL: "http://localhost:8000/api/v1/" });
+const API = axios.create({
+  baseURL: "https://uzer2024-server.onrender.com/api/v1/",
+});
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
@@ -19,6 +21,7 @@ export const signIn = (newUser) => API.post("/user/signIn/", newUser);
 
 // ORDERS
 export const fetchOrders = () => API.get("/orders");
+export const fetchTotal = () => API.get("/orders/totalPrice");
 export const fetchOrdersById = (userId) => API.get(`/orders/${userId}`);
 export const deleteOrders = (id) => API.delete(`/orders/${id}`);
 

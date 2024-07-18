@@ -25,7 +25,6 @@ const CreateCard = () => {
   });
 
   const [page, setPage] = useState(0);
-
   const formFields = [
     { name: "name", type: "text", label: "Name", required: true },
     {
@@ -43,9 +42,7 @@ const CreateCard = () => {
     { name: "image", type: "text", label: "Image URL", required: true },
     { name: "category", type: "dropdown", label: "Category", required: true },
   ];
-
   const navigate = useNavigate();
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -53,7 +50,6 @@ const CreateCard = () => {
       [name]: value,
     });
   };
-
   const handleCreatePost = async (e) => {
     e.preventDefault();
     try {
@@ -63,19 +59,16 @@ const CreateCard = () => {
       console.error("There was an error creating the product!", error);
     }
   };
-
   const nextPage = () => {
     if (page < Math.ceil(formFields.length / 4) - 1) {
       setPage(page + 1);
     }
   };
-
   const prevPage = () => {
     if (page > 0) {
       setPage(page - 1);
     }
   };
-
   const renderFields = () => {
     const startIndex = page * 4;
     const endIndex = startIndex + 4;

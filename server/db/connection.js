@@ -9,5 +9,5 @@ export const dataBaseConnection = async () => {
     console.log("DATA BASE IS CONNECTED");
   } catch (error) {
     console.log(error);
-  }
+  } 
 };

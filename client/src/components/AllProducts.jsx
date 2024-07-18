@@ -20,6 +20,7 @@ export function AllProducts() {
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
   useEffect(() => {
+    
     const category = queryParams.get("category");
     if (category !== null) {
       setQuery(category.toLowerCase());
@@ -72,6 +73,7 @@ export function AllProducts() {
   if (!productData) {
     return <Loader />;
   }
+
   return (
     <>
       <header style={{ width: "100%", top: "0rem" }} className="bg-white fixed">

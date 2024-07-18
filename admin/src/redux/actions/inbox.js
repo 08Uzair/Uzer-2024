@@ -1,5 +1,4 @@
 import * as api from "../api";
-import { handleErrors } from "../../utility/handelError";
 import {
   FETCH_INBOX,
   FETCH_INBOX_ID,
@@ -13,7 +12,6 @@ export const getInbox = () => async (dispatch) => {
     dispatch({ type: FETCH_INBOX, payload: data });
   } catch (error) {
     console.log(error);
-    handleErrors();
   }
 };
 
@@ -24,7 +22,6 @@ export const getInboxByID = (id) => async (dispatch) => {
     dispatch({ type: FETCH_INBOX_ID, payload: data });
   } catch (error) {
     console.log(error);
-    handleErrors();
   }
 };
 
@@ -35,6 +32,5 @@ export const deleteInbox = (id) => async (dispatch) => {
     dispatch({ type: DELETE_INBOX, payload: id });
   } catch (error) {
     console.log(error);
-    handleErrors();
   }
 };

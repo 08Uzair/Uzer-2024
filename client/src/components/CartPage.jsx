@@ -41,6 +41,7 @@ const CartItems = () => {
 
   useEffect(() => {
     dispatch(getCartProductByUserID(userData?._id));
+    window.scroll(0, 0);
   }, [dispatch, userData]);
 
   const handleDelete = (id) => {

@@ -3,7 +3,7 @@ import Chart from "chart.js";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/actions/product";
 import { getUsers } from "../../redux/actions/auth";
-import { getOrders } from "../../redux/actions/orders";
+import { getOrders, getTotal } from "../../redux/actions/orders";
 
 const setupSalesChart = (ctx) => {
   new Chart(ctx, {
@@ -63,9 +63,14 @@ const Analytics = () => {
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state?.orders);
+  const totalPriceData = useSelector((state) => state.orders.totalPrice);
   console.log(data);
   useEffect(() => {
     dispatch(getOrders());
+    window.scrollTo(0, 0);
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(getTotal());
     window.scrollTo(0, 0);
   }, [dispatch]);
 
@@ -109,8 +114,8 @@ const Analytics = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           <div className="bg-white p-4 rounded-lg shadow-lg flex items-center">
             <div className="flex-grow">
-              <h3 className="text-xl font-semibold">Total Sales</h3>
-              <p className="text-2xl">$123,456</p>
+              <h3 className="text-2xl font-semibold">Total Sales</h3>
+              <p className="text-3xl">₹ {totalPriceData?.totalPriceSum}</p>
             </div>
             <img
               style={{ width: "22%" }}
@@ -119,8 +124,8 @@ const Analytics = () => {
           </div>
           <div className="bg-white p-4 rounded-lg shadow-lg flex items-center">
             <div className="flex-grow">
-              <h3 className="text-xl font-semibold">Total Products</h3>
-              <p className="text-2xl">{productData?.length}</p>
+              <h3 className="text-2xl font-semibold">Total Products</h3>
+              <p className="text-3xl">{productData?.length}</p>
             </div>
             <img
               style={{ width: "34%" }}
@@ -129,8 +134,8 @@ const Analytics = () => {
           </div>
           <div className="bg-white p-4 rounded-lg shadow-lg flex items-center">
             <div className="flex-grow">
-              <h3 className="text-xl font-semibold">Total Customers</h3>
-              <p className="text-2xl">{userData?.length}</p>
+              <h3 className="text-2xl font-semibold">Total Customers</h3>
+              <p className="text-3xl">{userData?.length}</p>
             </div>
             <img
               style={{ width: "35%" }}

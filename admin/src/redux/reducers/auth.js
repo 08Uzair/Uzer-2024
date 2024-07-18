@@ -20,7 +20,7 @@ const authReducer = (state = { authData: null }, action) => {
       };
     case LOGOUT:
       return { ...state, authData: null, loading: false, errors: null };
-
+ 
     case FETCH_USER:
       return action.payload;
 

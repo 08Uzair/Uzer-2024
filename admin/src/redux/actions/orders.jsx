@@ -3,12 +3,21 @@ import {
   FETCH_ORDERS,
   FETCH_ORDERS_ID,
   DELETE_ORDERS,
+  FETCH_TOTAL,
 } from "../constants/actionTypes";
 
 export const getOrders = () => async (dispatch) => {
   try {
     const { data } = await api.fetchOrders();
     dispatch({ type: FETCH_ORDERS, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getTotal = () => async (dispatch) => {
+  try {
+    const { data } = await api.fetchTotal();
+    dispatch({ type: FETCH_TOTAL, payload: data });
   } catch (error) {
     console.log(error);
   }

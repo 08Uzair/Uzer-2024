@@ -1,5 +1,8 @@
 import axios from "axios";
-const API = axios.create({ baseURL: "http://localhost:8000/api/v1/" });
+const API = axios.create({
+  baseURL: "http://localhost:8100/api/v1/",
+  // baseURL: "https://uzer2024-server.onrender.com/api/v1/",
+});
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
@@ -36,3 +39,11 @@ export const updateCartProducts = (product, user) => API.put(`/cart/${id}`);
 
 // Orders
 export const createOrder = (newProducts) => API.post("/orders", newProducts);
+
+// Category
+export const fetchCategories = () => API.get("/category/");
+export const fetchCategoryById = (id) => API.get(`/category/${id}`);
+
+// Inbox
+export const createInbox = (newInbox) => API.post("/inbox", newInbox);
+export const fetchInbox = () => API.get("/inbox");

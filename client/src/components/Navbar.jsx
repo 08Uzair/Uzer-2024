@@ -2,10 +2,37 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartProductByUserID } from "../redux/actions/cart";
-
+import { toast } from "react-toastify";
+import { addInbox, createInbox } from "../redux/actions/inbox";
 const Navbar = ({ total }) => {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState();
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [user, setUser] = useState("");
+  // console.log(email);
+  // console.log(message);
+  // console.log(user);
+  const handleCreatePost = async () => {
+    try {
+      const newInbox = {
+        email,
+        message,
+        user,
+      };
+      console.log(newInbox);
+      await dispatch(addInbox(newInbox));
+      toast.info("Check Your Email for Updates 😊");
+    } catch (error) {
+      console.log(error);
+      toast.error("Message Sent Failed");
+    }
+  };
+  function createAction() {
+    setEmail(userData.email);
+    handleCreatePost();
+    handleOpen();
+  }
   const profile = JSON.parse(localStorage.getItem("profile"));
   const cartProductData = useSelector((state) => state?.cart);
   // console.log(cartProductData);
@@ -17,9 +44,11 @@ const Navbar = ({ total }) => {
   useEffect(() => {
     const profile = JSON.parse(localStorage.getItem("profile"))?.result;
     setUserData(profile);
+    setUser(profile._id);
   }, []);
-  // console.log(userData);
-
+  console.log(userData);
+  const [openMessage, setOpenMessage] = useState(false);
+  const handleOpen = () => setOpenMessage(!openMessage);
   return (
     <>
       <header className="bg-white">
@@ -75,14 +104,13 @@ const Navbar = ({ total }) => {
           <nav className="contents">
             <ul className="ml-4 xl:w-48 flex items-center justify-end">
               <NavLink to="/userProfile">
-                <li className="ml-2 lg:ml-4 relative inline-block">
+                <li className="ml-2 lg:ml-4 relative ">
                   <img
                     className="h-8 w-11 rounded-full"
                     src={
-                      profile?.result?.avatar ||
+                      userData?.avatar ||
                       "https://tse3.mm.bing.net/th?id=OIP.2hAVCZRMcBjsE8AGQfWCVQHaHa&pid=Api&P=0&h=220"
                     }
-                    alt=""
                   />
                 </li>
               </NavLink>
@@ -96,6 +124,75 @@ const Navbar = ({ total }) => {
                   </div>
                 </NavLink>
               </li>
+              <li className="ml-2 lg:ml-4 relative inline-block">
+                <button title="Support" onClick={handleOpen}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-9 lg:h-10 p-2 text-gray-200"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2C6.486 2 2 6.486 2 12v4.143C2 17.167 2.897 18 4 18h1a1 1 0 0 0 1-1v-5.143a1 1 0 0 0-1-1h-.908C4.648 6.987 7.978 4 12 4s7.352 2.987 7.908 6.857H19a1 1 0 0 0-1 1V18c0 1.103-.897 2-2 2h-2v-1h-4v3h6c2.206 0 4-1.794 4-4 1.103 0 2-.833 2-1.857V12c0-5.514-4.486-10-10-10z"></path>
+                  </svg>
+                </button>
+              </li>
+              <div>
+                {openMessage && (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+                    <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+                      <div className="flex justify-between items-center mb-4">
+                        <h4 className="text-2xl font-semibold text-gray-900">
+                          Message
+                        </h4>
+                        <button
+                          onClick={handleOpen}
+                          className="text-gray-500 hover:text-gray-700"
+                        >
+                          ×
+                        </button>
+                      </div>
+                      <form>
+                        <div className="mb-4">
+                          <label className="block mb-1 text-gray-700">
+                            Email
+                          </label>
+                          <input
+                            value={userData.email}
+                            type="email"
+                            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Enter Email..."
+                          />
+                        </div>
+                        <div className="mb-4">
+                          <textarea
+                            onChange={(e) => setMessage(e.target.value)}
+                            type="text"
+                            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Message..."
+                          />
+                        </div>
+                        <div className="mb-4 flex items-center">
+                          <label
+                            htmlFor="rememberMe"
+                            className="text-sm text-gray-500"
+                          >
+                            <p>
+                              *please send us your query, will reach out you
+                              soon...
+                            </p>
+                          </label>
+                        </div>
+                        <button
+                          onClick={createAction}
+                          type="button"
+                          className="w-full px-4 py-2 font-semibold text-white bg-blue-500 rounded hover:bg-blue-700"
+                        >
+                          Send
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                )}
+              </div>
               <NavLink to="/cart">
                 <li className="ml-2 lg:ml-4 relative inline-block">
                   <button onClick={() => setOpen(true)}>

@@ -7,8 +7,8 @@ import Loader from "../../utility/Loader";
 
 const OrdersData = () => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state?.orders);
-
+  const data = useSelector((state) => state?.orders.order);
+  console.log(data);
   useEffect(() => {
     dispatch(getOrders());
     window.scrollTo(0, 0);
