@@ -54,7 +54,7 @@ Smooth transitions and intuitive navigation to category-specific pages.
 Each category page displays relevant products with sorting and filtering options.
 
 ## 🌐 Live Demo:
-Link to Live Demo
+[Link to Live Demo](https://uzerqureshi-eccom.netlify.app/)
 
 ## 🎥 Demo Video:
 Link to Demo Video
@@ -62,7 +62,7 @@ Link to Demo Video
 
 # REST API's ENDOINTS
 
-🌐 BASE_URL = http://localhost:8000/api/v1/
+🌐 BASE_URL = `https://uzer2024-server.onrender.com/api/v1/`
 
  ## Users
 ➡️ GET : `/users`
