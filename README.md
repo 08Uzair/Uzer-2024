@@ -2,7 +2,6 @@
 ## Description:
 This e-commerce website is built using the MERN stack (MongoDB, Express.js, React, and Node.js) along with Tailwind CSS for styling. It offers a seamless shopping experience with a focus on security, user-friendly interfaces, and efficient management.
 
-## 🌌 SOME DEMO PAGES :
 ### 1. HOME PAGE :
 
 ![4](https://github.com/user-attachments/assets/5d11c74c-2a63-4507-afc5-a1b39bbe097b)
