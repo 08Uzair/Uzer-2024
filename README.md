@@ -2,6 +2,16 @@
 ## Description:
 This e-commerce website is built using the MERN stack (MongoDB, Express.js, React, and Node.js) along with Tailwind CSS for styling. It offers a seamless shopping experience with a focus on security, user-friendly interfaces, and efficient management.
 
+## 🌐 Live Demo of Application:
+[Link to Live Demo](https://uzerqureshi-eccom.netlify.app/)
+
+## 🎥 Demo Video of Application:
+Link to Demo Video
+## 🌐 Live Demo Of Admin Page:
+[Link to Live Demo](https://uzerqureshi-eccom.netlify.app/)
+
+## 🎥 Demo Video Of Admin Page:
+Link to Demo Video
 ### 1. HOME PAGE :
 
 ![4](https://github.com/user-attachments/assets/5d11c74c-2a63-4507-afc5-a1b39bbe097b)
@@ -70,11 +80,7 @@ Users can select product categories by clicking on category images in the galler
 Smooth transitions and intuitive navigation to category-specific pages.
 Each category page displays relevant products with sorting and filtering options.
 
-## 🌐 Live Demo:
-[Link to Live Demo](https://uzerqureshi-eccom.netlify.app/)
 
-## 🎥 Demo Video:
-Link to Demo Video
 
 
 # REST API's ENDOINTS
