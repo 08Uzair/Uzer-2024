@@ -82,3 +82,20 @@ Link to Demo Video
 
 🚮 DELETE : `/products/:id`
 
+## 🌌 SOME DEMO PAGES :
+### 1. HOME PAGE :
+
+![4](https://github.com/user-attachments/assets/5d11c74c-2a63-4507-afc5-a1b39bbe097b)
+
+### 2. AUTHENTICATION PAGE (SIGNUP / SIGNIN) :
+
+![3](https://github.com/user-attachments/assets/cf570cd6-4fe2-4ae2-b4fe-f59e2be7abb9)
+
+### 3. SINGLE PRODUCT PAGE
+
+![7](https://github.com/user-attachments/assets/02e07b54-565d-4f8e-bec8-f6cad1dcbf6d)
+### 4. CART PAGE : 
+
+![5](https://github.com/user-attachments/assets/69c1723a-28d2-4918-a700-7cb4530d5b2a)
+
+
