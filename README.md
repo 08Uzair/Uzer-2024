@@ -8,7 +8,7 @@ This e-commerce website is built using the MERN stack (MongoDB, Express.js, Reac
 ## 🎥 Demo Video of Application:
 Link to Demo Video
 ## 🌐 Live Demo Of Admin Page:
-[Link to Live Demo](https://uzerqureshi-eccom.netlify.app/)
+[Link to Live Demo](https://uzerqureshi-eccom-admin.netlify.app/)
 
 ## 🎥 Demo Video Of Admin Page:
 Link to Demo Video
