@@ -13,6 +13,7 @@ const Auth = () => {
     dispatch(getUsers());
   }, [dispatch]);
   const handleSignIn = async (e) => {
+    setLoading(true)
     e.preventDefault();
     try {
       const user = {
@@ -22,8 +23,8 @@ const Auth = () => {
 
       console.log(user);
       await dispatch(signin(user));
-      setLoading(false);
       navigate("/");
+      setLoading(false);
       window.location.reload();
     } catch (error) {
       setLoading(false);
@@ -34,7 +35,7 @@ const Auth = () => {
     window.location.reload();
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 shadow-md w-full max-w-md">
         <div className="flex justify-center mb-8">
           <button
