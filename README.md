@@ -53,10 +53,10 @@ Users can select product categories by clicking on category images in the galler
 Smooth transitions and intuitive navigation to category-specific pages.
 Each category page displays relevant products with sorting and filtering options.
 
-# 🌐 Live Demo:
+## 🌐 Live Demo:
 Link to Live Demo
 
-# 🎥 Demo Video:
+## 🎥 Demo Video:
 Link to Demo Video
 
 
