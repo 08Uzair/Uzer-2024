@@ -27,7 +27,7 @@ const Inbox = () => {
                 Inbox
               </h5>
               <p className="block mt-1 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-                Number of Messages : {data.length}
+                Number of Messages : {data?.length}
               </p>
             </div>
           </div>
