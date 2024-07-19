@@ -1,19 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteInbox, getInbox } from "../redux/actions/inbox";
 import { getTime } from "../utility/getTime";
 import { toast } from "react-toastify";
 const Inbox = () => {
   const dispatch = useDispatch();
+  const [deleted, setDeleted] = useState(false);
   const data = useSelector((state) => state.inbox.message);
   useEffect(() => {
     dispatch(getInbox());
-  }, []);
+    setDeleted(false);
+  }, [deleted]);
   console.log(data);
   const handleDelete = (id) => {
     dispatch(deleteInbox(id));
+    setDeleted(true);
     toast.success("Message Deleted Sucessfully 😊");
-    dispatch(getInbox());
   };
   return (
     <div style={{ width: "85%" }}>
@@ -25,7 +27,7 @@ const Inbox = () => {
                 Inbox
               </h5>
               <p className="block mt-1 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-                See all Messages
+                Number of Messages : {data.length}
               </p>
             </div>
           </div>

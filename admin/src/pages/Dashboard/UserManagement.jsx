@@ -6,15 +6,17 @@ import Loader from "../../utility/Loader";
 const UserManagement = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state?.authReducer?.users);
+  const [deleted, setDeleted] = useState(false);
+
   // console.log(data);
   useEffect(() => {
     dispatch(getUsers());
     window.scrollTo(0, 0);
-  }, [dispatch]);
+  }, [dispatch, deleted]);
 
-  const handleDelete = (id) => { 
+  const handleDelete = (id) => {
     dispatch(deleteUser(id));
-    window.location.reload();
+    setDeleted(true);
   };
   if (!data) {
     return <Loader />;

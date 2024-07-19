@@ -44,7 +44,7 @@ const Navbar = ({ total }) => {
   useEffect(() => {
     const profile = JSON.parse(localStorage.getItem("profile"))?.result;
     setUserData(profile);
-    setUser(profile._id);
+    setUser(profile?._id);
   }, []);
   console.log(userData);
   const [openMessage, setOpenMessage] = useState(false);
@@ -102,17 +102,18 @@ const Navbar = ({ total }) => {
           {/* buttons */}
 
           <nav className="contents">
-            <ul className="ml-4 xl:w-48 flex items-center justify-end">
+            <ul
+              style={{ width: "14.3rem" }}
+              className="ml-4 flex items-center justify-end"
+            >
               <NavLink to="/userProfile">
-                <li className="ml-2 lg:ml-4 relative ">
-                  <img
-                    className="h-8 w-11 rounded-full"
-                    src={
-                      userData?.avatar ||
-                      "https://tse3.mm.bing.net/th?id=OIP.2hAVCZRMcBjsE8AGQfWCVQHaHa&pid=Api&P=0&h=220"
-                    }
-                  />
-                </li>
+                <img
+                  className="h-8 w-11 rounded-full"
+                  src={
+                    userData?.avatar ||
+                    "https://tse3.mm.bing.net/th?id=OIP.2hAVCZRMcBjsE8AGQfWCVQHaHa&pid=Api&P=0&h=220"
+                  }
+                />
               </NavLink>
 
               <li className="ml-2 lg:ml-4 relative inline-block">

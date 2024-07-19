@@ -102,17 +102,29 @@ const Auth = () => {
         ) : (
           <SignUpForm
             handelSignUp={handelSignUp}
+            avatar={avatar}
             setAvatar={setAvatar}
+            lname={lname}
             setLname={setLname}
+            fname={fname}
             setFname={setFname}
+            country={country}
             setCountry={setCountry}
+            state={state}
             setState={setState}
+            city={city}
             setCity={setCity}
+            pinCode={pinCode}
             setPinCode={setPinCode}
+            email={email}
             setEmail={setEmail}
+            password={password}
             setPassword={setPassword}
+            number={number}
             setNumber={setNumber}
+            address1={address1}
             setAddress1={setAddress1}
+            address2={address2}
             setAddress2={setAddress2}
             loading={loading}
           />
@@ -174,18 +186,30 @@ const SignInForm = ({ handleSignIn, setEmail, setPassword, loading }) => (
 
 const SignUpForm = ({
   handelSignUp,
+  avatar,
   setAvatar,
+  lname,
   setLname,
   setFname,
+  fname,
   setCountry,
+  country,
   setState,
+  state,
   setCity,
+  city,
   setPinCode,
+  pinCode,
   setEmail,
+  email,
   setPassword,
+  password,
   setNumber,
+  number,
   setAddress1,
+  address1,
   setAddress2,
+  address2,
   loading,
 }) => {
   const [step, setStep] = useState(1);
@@ -215,6 +239,7 @@ const SignUpForm = ({
               className="shadow appearance-none border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Image Url"
               onChange={(e) => setAvatar(e.target.value)}
+              value={avatar}
             />
           </div>
           <div className="mb-4">
@@ -226,6 +251,7 @@ const SignUpForm = ({
               type="text"
               placeholder="First Name"
               onChange={(e) => setFname(e.target.value)}
+              value={fname}
             />
           </div>
           <div className="mb-4">
@@ -237,6 +263,7 @@ const SignUpForm = ({
               type="text"
               placeholder="Last Name"
               onChange={(e) => setLname(e.target.value)}
+              value={lname}
             />
           </div>
           <div className="flex items-center justify-between">
@@ -261,6 +288,7 @@ const SignUpForm = ({
               type="text"
               placeholder="Country"
               onChange={(e) => setCountry(e.target.value)}
+              value={country}
             />
           </div>
           <div className="mb-4">
@@ -272,6 +300,7 @@ const SignUpForm = ({
               type="text"
               placeholder="State"
               onChange={(e) => setState(e.target.value)}
+              value={state}
             />
           </div>
           <div className="mb-4">
@@ -283,6 +312,7 @@ const SignUpForm = ({
               type="text"
               placeholder="City"
               onChange={(e) => setCity(e.target.value)}
+              value={city}
             />
           </div>
           <div className="flex items-center justify-between">
@@ -314,6 +344,7 @@ const SignUpForm = ({
               type="Number"
               placeholder="Pin-Code"
               onChange={(e) => setPinCode(e.target.value)}
+              value={pinCode}
             />
           </div>
           <div className="mb-4">
@@ -325,6 +356,7 @@ const SignUpForm = ({
               type="email"
               placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
           </div>
           <div className="mb-4">
@@ -336,6 +368,7 @@ const SignUpForm = ({
               type="password"
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
+              value={password}
             />
           </div>
           <div className="flex items-center justify-between">
@@ -367,6 +400,7 @@ const SignUpForm = ({
               type="number"
               placeholder="Number"
               onChange={(e) => setNumber(e.target.value)}
+              value={number}
             />
           </div>
 
@@ -379,6 +413,7 @@ const SignUpForm = ({
               type="text"
               placeholder="Address-1"
               onChange={(e) => setAddress1(e.target.value)}
+              value={address1}
             />
           </div>
           <div className="mb-4">
@@ -390,6 +425,7 @@ const SignUpForm = ({
               type="text"
               placeholder="Address-2"
               onChange={(e) => setAddress2(e.target.value)}
+              value={address2}
             />
           </div>
           <div className="flex items-center justify-between">

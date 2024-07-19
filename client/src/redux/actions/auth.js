@@ -7,6 +7,9 @@ export const signin = (newUser) => async (dispatch) => {
     const { data } = await api.signIn(newUser);
     dispatch({ type: AUTH, payload: data });
     toast.success("Login Sucessfull");
+    setTimeout(() => {
+      window.location.reload();
+    }, 50);
   } catch (error) {
     toast.error("Invalid Email or Password");
     return handleErrors(error.response.status);
