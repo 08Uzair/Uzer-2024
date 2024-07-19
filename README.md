@@ -91,12 +91,30 @@ Link to Demo Video
 
 ![11](https://github.com/user-attachments/assets/86a74a01-49f0-44b1-8ed7-3635a27d1d9f)
 
-
-### 3. SINGLE PRODUCT PAGE
+### 3. SINGLE PRODUCT PAGE :
 
 ![7](https://github.com/user-attachments/assets/02e07b54-565d-4f8e-bec8-f6cad1dcbf6d)
+
 ### 4. CART PAGE : 
 
 ![5](https://github.com/user-attachments/assets/69c1723a-28d2-4918-a700-7cb4530d5b2a)
+
+### 5. ADMIN AUTHENTICATION PAGE
+
+![10](https://github.com/user-attachments/assets/05275f72-141b-4229-9407-f109dc5ee52e)
+
+### 6. HOME PAGE -ADMIN : 
+
+![8](https://github.com/user-attachments/assets/f45dbc14-9d14-4472-b95f-bb85219a722b)
+
+### 7. ADMIN ANALYTICS PAGE :
+
+![9](https://github.com/user-attachments/assets/4fae50f7-5367-40a7-b457-fc2148033f25)
+
+
+
+
+
+
 
 
