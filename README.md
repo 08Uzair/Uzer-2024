@@ -89,7 +89,8 @@ Link to Demo Video
 
 ### 2. AUTHENTICATION PAGE (SIGNUP / SIGNIN) :
 
-![3](https://github.com/user-attachments/assets/cf570cd6-4fe2-4ae2-b4fe-f59e2be7abb9)
+![11](https://github.com/user-attachments/assets/86a74a01-49f0-44b1-8ed7-3635a27d1d9f)
+
 
 ### 3. SINGLE PRODUCT PAGE
 
