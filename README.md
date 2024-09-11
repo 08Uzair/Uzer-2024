@@ -7,8 +7,9 @@ This e-commerce website is built using the MERN stack (MongoDB, Express.js, Reac
 
 ## 🎥 Demo Video of Application:
 Link to Demo Video
-## 🌐 Live Demo Of Admin Page: If You Want the Email and the Password of the Admin Panel then Email me at [uzerqureshi26@gmail.com]
+## 🌐 Live Demo Of Admin Page: 
 [Link to Live Demo](https://uzerqureshi-eccom-admin.netlify.app/)
+If You Want the Email and the Password of the Admin Panel then Email me at [uzerqureshi26@gmail.com]
 
 ## 🎥 Demo Video Of Admin Page:
 Link to Demo Video
