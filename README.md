@@ -7,7 +7,7 @@ This e-commerce website is built using the MERN stack (MongoDB, Express.js, Reac
 
 ## 🎥 Demo Video of Application:
 Link to Demo Video
-## 🌐 Live Demo Of Admin Page:
+## 🌐 Live Demo Of Admin Page: If You Want the Email and the Password of the Admin Panel then Email me at [uzerqureshi26@gmail.com]
 [Link to Live Demo](https://uzerqureshi-eccom-admin.netlify.app/)
 
 ## 🎥 Demo Video Of Admin Page:
@@ -62,7 +62,7 @@ Search functionality to quickly find specific products.
 Detailed product pages with descriptions, reviews, and related products.
 🖼️ Product Image Gallery at Home Page:
 
-# 🛠️ Admin Page:
+# 🛠️ Admin Page: 
 
 ### 📊 Dashboard :  Overview of key metrics such as total sales, number of users, and order statuses.
 ### 📦 Product Management :  Add, edit, and delete products, manage product categories, and update stock levels.
