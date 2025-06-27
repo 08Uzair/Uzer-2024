@@ -1,0 +1,39 @@
+* {
+    scroll-behavior: smooth;
+    transition: all 0.5s ease-in-out;
+}
+
+.gridBox {
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
+}
+
+.lineClamp {
+    width: 200px;
+    /* Adjust the width as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@keyframes beat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+}
+
+.animate-beat {
+    animation: beat 0.6s infinite;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-400 {
+    animation-delay: 0.4s;
+}
