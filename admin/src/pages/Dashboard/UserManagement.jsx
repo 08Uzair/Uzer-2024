@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, getUsers } from "../../redux/actions/auth";
 import Loader from "../../utility/Loader";
@@ -124,4 +124,4 @@ const UserManagement = () => {
   );
 };
 
-export default UserManagement;
+export default memo( UserManagement);

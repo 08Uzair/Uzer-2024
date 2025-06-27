@@ -8,6 +8,7 @@ import {
   FETCH_CART_PRODUCTS_BY_USER_ID,
   DELETE_CART_PRODUCT_BY_USER_ID,
 } from "../constants/actionTypes";
+import { TOAST } from "../../utility/constantToast";
 
 export const getCartProducts = () => async (dispatch) => {
   try {
@@ -22,8 +23,8 @@ export const getCartProducts = () => async (dispatch) => {
 export const createCartProducts = (product) => async (dispatch) => {
   try {
     const { data } = await api.addCartProducts(product);
-    console.log("Created Cart Product:", data); // Debugging log
-    toast.success("Added to Cart Successfully");
+    // console.log("Created Cart Product:", data); // Debugging log
+    toast.success(TOAST.CART.SUCCESS_CART);
     dispatch({ type: CREATE_CART_PRODUCT, payload: data });
     // window.location.reload();
   } catch (error) {
@@ -62,12 +63,12 @@ export const deleteCartProduct = (id) => async (dispatch) => {
     console.log(error);
   }
 };
-// export const CartProductDeletedByUserId = (userId) => async (dispatch) => {
-//   try {
-//     await api.deleteCartProductByUserId(userId);
-//     console.log("Deleted Cart Product ID:", userId); // Debugging log
-//     dispatch({ type: DELETE_CART_PRODUCT_BY_USER_ID, payload: { userId } });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const CartProductDeletedByUserId = (userId) => async (dispatch) => {
+  try {
+    await api.deleteCartProductByUserId(userId);
+    console.log("Deleted Cart Product ID:", userId); // Debugging log
+    dispatch({ type: DELETE_CART_PRODUCT_BY_USER_ID, payload: { userId } });
+  } catch (error) {
+    console.log(error);
+  }
+};

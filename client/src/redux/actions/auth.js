@@ -2,16 +2,17 @@ import * as api from "../api";
 import { handleErrors } from "../../utility/handelError";
 import { AUTH, FETCH_USER_ID, FETCH_USER } from "../constants/actionTypes";
 import { toast } from "react-toastify";
+import { TOAST } from "../../utility/constantToast";
 export const signin = (newUser) => async (dispatch) => {
   try {
     const { data } = await api.signIn(newUser);
     dispatch({ type: AUTH, payload: data });
-    toast.success("Login Sucessfull");
+    toast.success(TOAST.AUTH.SUCCESS_LOGIN);
     setTimeout(() => {
       window.location.reload();
     }, 50);
   } catch (error) {
-    toast.error("Invalid Email or Password");
+    toast.error(TOAST.AUTH.INVALID_LOGIN);
     return handleErrors(error.response.status);
   }
 };
@@ -43,16 +44,16 @@ export const signUp = (newUser) => async (dispatch) => {
     !number ||
     !address1
   ) {
-    toast.error("Please fill all the fields");
+    toast.error(TOAST.AUTH.VALIDATION_REGISTER);
     return;
   }
 
   try {
     const { data } = await api.signUp(newUser);
     dispatch({ type: AUTH, payload: data });
-    toast.success("Registered Successfully");
+    toast.success(TOAST.AUTH.SUCCESS_REGISTER);
   } catch (error) {
-    toast.error("Registration Failed");
+    toast.error(TOAST.AUTH.ERROR_REGISTER);
     console.log(error);
   }
 };

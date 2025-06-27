@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/actions/products";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createCartProducts } from "../redux/actions/cart";
 import { toast } from "react-toastify";
 import Loader from "../utility/Loader";
+import { TOAST } from "../utility/constantToast";
 
-export function ProductCard1() {
-  const productData = useSelector((state) => state?.products?.products.products);
+function ProductCard1() {
+  const productData = useSelector(
+    (state) => state?.products?.products.products
+  );
   // console.log(productData, "This is product data - 1");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,7 +36,7 @@ export function ProductCard1() {
 
     try {
       dispatch(createCartProducts(newProduct));
-      toast.success("Product added to cart");
+      toast.success(TOAST.CART.SUCCESS_CART);
     } catch (error) {
       console.log(error);
     }
@@ -76,10 +79,10 @@ export function ProductCard1() {
 
   return (
     <>
-        <h1 className="text-3xl font-bold mb-12 mt-12 text-center w-full">
-        FEATURED PRODUCTS
-      </h1>
       <div className="flex flex-col sm:flex-row items-center justify-between mx-4 sm:mx-16 mt-8 mb-8">
+        <h1 className="text-3xl font-bold mb-12 mt-12 text-center ">
+          FEATURED PRODUCTS
+        </h1>
         <p className="text-md text-sky-400">
           <NavLink to="/allProducts">View more</NavLink>
         </p>
@@ -130,3 +133,4 @@ export function ProductCard1() {
     </>
   );
 }
+export default memo(ProductCard1);

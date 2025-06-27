@@ -1,15 +1,30 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/actions/product";
 import { getUsers } from "../../redux/actions/auth";
 import { getOrders, getTotal } from "../../redux/actions/orders";
 import Loader from "../../utility/Loader";
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
 } from "recharts";
 
-const COLORS = ["#60a5fa", "#4ade80", "#facc15", "#f87171", "#a78bfa", "#fb7185"];
+const COLORS = [
+  "#60a5fa",
+  "#4ade80",
+  "#facc15",
+  "#f87171",
+  "#a78bfa",
+  "#fb7185",
+];
 
 const Analytics = () => {
   const dispatch = useDispatch();
@@ -29,23 +44,24 @@ const Analytics = () => {
     return <Loader />;
   }
 
-const productChartData = products.map((p) => ({
-  name: p.name.length > 15 ? `${p.name.slice(0, 20)}...` : p.name,
-  Value: p.price * (p.stocks || 1),
-}));
+  const productChartData = products.map((p) => ({
+    name: p.name.length > 15 ? `${p.name.slice(0, 20)}...` : p.name,
+    Value: p.price * (p.stocks || 1),
+  }));
 
-
-  const userActiveCount = users.filter(u => u.active).length;
+  const userActiveCount = users.filter((u) => u.active).length;
   const userInactiveCount = users.length - userActiveCount;
   const userChartData = [
-    { name: 'Active Users', Value: userActiveCount },
-    { name: 'Inactive Users', Value: userInactiveCount },
+    { name: "Active Users", Value: userActiveCount },
+    { name: "Inactive Users", Value: userInactiveCount },
   ];
 
   return (
     <div style={{ width: "85%" }}>
       <div className="min-h-screen p-6 bg-gray-100">
-        <h2 className="text-3xl font-bold mb-8 text-gray-800">E‑commerce Analytics</h2>
+        <h2 className="text-3xl font-bold mb-8 text-gray-800">
+          E‑commerce Analytics
+        </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white p-6 rounded-xl shadow-lg hover:scale-105 transition">
@@ -59,7 +75,10 @@ const productChartData = products.map((p) => ({
                   tick={({ x, y, payload }) => (
                     <g transform={`translate(${x},${y + 10})`}>
                       <foreignObject width={60} height={20}>
-                        <div className="line-clamp-1 text-xs text-center" style={{ width: '60px' }}>
+                        <div
+                          className="line-clamp-1 text-xs text-center"
+                          style={{ width: "60px" }}
+                        >
                           {payload.Value}
                         </div>
                       </foreignObject>
@@ -105,7 +124,11 @@ const productChartData = products.map((p) => ({
               title: "Total Sales",
               Value: totalPriceData.totalPriceSum,
               svg: (
-                <svg className="w-14 h-14 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <svg
+                  className="w-14 h-14 text-green-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M10 15l-5-5h3V5h4v5h3l-5 5z" />
                 </svg>
               ),
@@ -115,7 +138,11 @@ const productChartData = products.map((p) => ({
               title: "Total Products",
               Value: products.length,
               svg: (
-                <svg className="w-14 h-14 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                <svg
+                  className="w-14 h-14 text-blue-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M4 3h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1z" />
                 </svg>
               ),
@@ -125,7 +152,11 @@ const productChartData = products.map((p) => ({
               title: "Total Customers",
               Value: users.length,
               svg: (
-                <svg className="w-14 h-14 text-purple-500" fill="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-14 h-14 text-purple-500"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                 </svg>
               ),
@@ -149,4 +180,4 @@ const productChartData = products.map((p) => ({
   );
 };
 
-export default Analytics;
+export default memo(Analytics);

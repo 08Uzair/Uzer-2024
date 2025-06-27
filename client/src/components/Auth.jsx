@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getUsers, signUp, signin } from "../redux/actions/auth";
 import { uploadImageToCloudinary } from "../utility/uploadToCloudinary";
+import { toast } from "react-toastify";
 
 const btnStages = [
   "Logging in...",
@@ -22,7 +23,6 @@ const Auth = () => {
   const [uploading, setUploading] = useState(false);
   const [loadingTextIndex, setLoadingTextIndex] = useState(0);
   const [textCycleInterval, setTextCycleInterval] = useState(null);
-
   const [formData, setFormData] = useState({
     avatar: "",
     fname: "",
@@ -49,10 +49,7 @@ const Auth = () => {
     try {
       setUploading(true);
       const imageUrl = await uploadImageToCloudinary(file);
-      setFormData((prev) => ({
-        ...prev,
-        avatar: imageUrl,
-      }));
+      setFormData((prev) => ({ ...prev, avatar: imageUrl }));
     } catch (err) {
       console.error("Image upload failed", err);
     } finally {
@@ -71,9 +68,7 @@ const Auth = () => {
     if (file) handleImageUpload(file);
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+  const handleDragOver = (e) => e.preventDefault();
 
   const handleChange = (field) => (e) =>
     setFormData({ ...formData, [field]: e.target.value });
@@ -93,18 +88,40 @@ const Auth = () => {
     setTextCycleInterval(null);
   };
 
-  const handleSignUp = async (e) => {
-    e.preventDefault();
+  const handleSignUp = async () => {
+    const requiredFields = [
+      { key: "avatar", label: "Avatar" },
+      { key: "fname", label: "First Name" },
+      { key: "lname", label: "Last Name" },
+      { key: "country", label: "Country" },
+      { key: "state", label: "State" },
+      { key: "city", label: "City" },
+      { key: "pinCode", label: "Pin Code" },
+      { key: "email", label: "Email" },
+      { key: "password", label: "Password" },
+      { key: "number", label: "Mobile Number" },
+      { key: "address1", label: "Address 1" },
+    ];
+
+    const emptyField = requiredFields.find(
+      (field) => !formData[field.key]?.toString().trim()
+    );
+
+    if (emptyField) {
+      toast.error(`${emptyField.label} is required`);
+      return;
+    }
+
     setLoading(true);
     startTextCycle();
     try {
       await dispatch(signUp(formData));
+      window.location.reload();
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
       stopTextCycle();
-      window.location.reload();
     }
   };
 
@@ -127,16 +144,13 @@ const Auth = () => {
 
   return (
     <div className="w-full h-screen flex flex-col md:flex-row">
-      {/* Left Side */}
       <div className="hidden md:flex md:w-1/2 bg-[#2563eb] flex-col justify-center items-center text-white px-8">
-        <div className="gap-10 text-center">
-          <h1 className="text-3xl lg:text-5xl font-bold mb-4">
-            YOUR GATEWAY TO <br /> HASSEL-FREE SHOPPING
-          </h1>
-          <p className="max-w-md mb-8 text-base lg:text-lg font-bold p-4 border-2 border-white bg-[#0000007d] rounded-[50px]">
-            LOGIN OR REGISTER — YOUR CART AWAITS
-          </p>
-        </div>
+        <h1 className="text-3xl lg:text-5xl font-bold mb-4">
+          YOUR GATEWAY TO HASSEL-FREE SHOPPING
+        </h1>
+        <p className="max-w-md mb-8 text-base lg:text-lg font-bold p-4 border-2 border-white bg-[#0000007d] rounded-[50px]">
+          LOGIN OR REGISTER — YOUR CART AWAITS
+        </p>
         <img
           src="https://res.cloudinary.com/dyphiefiy/image/upload/v1750936090/man-shopping-online-using-e-commerce-app-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--application-pack-illustrations-5791999_zmdkv8.png"
           alt="icon"
@@ -144,14 +158,12 @@ const Auth = () => {
         />
       </div>
 
-      {/* Right Side */}
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-6 sm:px-10">
         <div className="w-full max-w-md">
-          {/* Toggle Buttons */}
           <div className="flex justify-center mb-6 space-x-2">
             <button
               onClick={() => setIsSignIn(true)}
-              className={`w-1/2 py-3 text-lg rounded-l-3xl font-semibold transition ${
+              className={`w-1/2 py-3 text-lg rounded-l-3xl font-semibold ${
                 isSignIn
                   ? "bg-[#2563eb] text-white"
                   : "bg-gray-200 text-gray-800 hover:bg-gray-300"
@@ -161,7 +173,7 @@ const Auth = () => {
             </button>
             <button
               onClick={() => setIsSignIn(false)}
-              className={`w-1/2 py-3 text-lg rounded-r-3xl font-semibold transition ${
+              className={`w-1/2 py-3 text-lg rounded-r-3xl font-semibold ${
                 !isSignIn
                   ? "bg-[#2563eb] text-white"
                   : "bg-gray-200 text-gray-800 hover:bg-gray-300"
@@ -171,7 +183,6 @@ const Auth = () => {
             </button>
           </div>
 
-          {/* Form */}
           {isSignIn ? (
             <SignInForm
               handleSignIn={handleSignIn}
@@ -223,9 +234,6 @@ const SignInForm = ({ handleSignIn, handleChange, loading, loadingText }) => (
     >
       {loading ? loadingText : "Sign In"}
     </button>
-    <p className="text-center text-sm text-indigo-600 hover:underline cursor-pointer">
-      Forgot Password?
-    </p>
   </form>
 );
 
@@ -241,6 +249,11 @@ const SignUpForm = ({
   loadingText,
 }) => {
   const [step, setStep] = useState(1);
+  const fileInputRef = useRef(null);
+
+  const handleDivClick = () => fileInputRef.current?.click();
+
+  const handleNext = () => setStep(step + 1);
 
   const renderStepFields = () => {
     switch (step) {
@@ -248,12 +261,13 @@ const SignUpForm = ({
         return (
           <>
             <div
-              className="w-full h-32 border-2 border-dashed flex items-center justify-center mb-4 rounded-xl cursor-pointer hover:bg-gray-100 transition"
+              className="w-full h-32 border-2 border-dashed flex items-center justify-center mb-4 rounded-xl cursor-pointer hover:bg-gray-100"
               onDrop={handleDrop}
               onDragOver={handleDragOver}
+              onClick={handleDivClick}
             >
               {uploading ? (
-                <p className="text-gray-600">Uploading...</p>
+                <p>Uploading...</p>
               ) : formData.avatar ? (
                 <img
                   src={formData.avatar}
@@ -261,15 +275,14 @@ const SignUpForm = ({
                   className="h-24 object-contain"
                 />
               ) : (
-                <p className="text-gray-600">
-                  Drag & Drop Image or Click to Upload
-                </p>
+                <p>Drag & Drop Image or Click to Upload</p>
               )}
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleFileSelect}
                 className="hidden"
+                ref={fileInputRef}
               />
             </div>
             <Input
@@ -353,14 +366,14 @@ const SignUpForm = ({
   };
 
   return (
-    <form onSubmit={handleSignUp} className="space-y-5">
+    <div className="space-y-5">
       {renderStepFields()}
       <div className="flex justify-between mt-4">
         {step > 1 && (
           <button
             type="button"
             onClick={() => setStep(step - 1)}
-            className="px-5 py-2 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300 transition font-medium"
+            className="px-5 py-2 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300"
           >
             Previous
           </button>
@@ -368,22 +381,23 @@ const SignUpForm = ({
         {step < 4 ? (
           <button
             type="button"
-            onClick={() => setStep(step + 1)}
-            className="ml-auto px-5 py-2 bg-[#2563eb] text-white rounded-xl hover:bg-indigo-600 transition font-medium"
+            onClick={handleNext}
+            className="ml-auto px-5 py-2 bg-[#2563eb] text-white rounded-xl hover:bg-indigo-600"
           >
             Next
           </button>
         ) : (
           <button
-            type="submit"
+            type="button"
             disabled={loading}
-            className="ml-auto px-5 py-2 bg-[#2563eb] text-white rounded-xl hover:bg-indigo-600 transition font-medium"
+            onClick={handleSignUp}
+            className="ml-auto px-5 py-2 bg-[#2563eb] text-white rounded-xl hover:bg-indigo-600"
           >
             {loading ? loadingText : "Sign Up"}
           </button>
         )}
       </div>
-    </form>
+    </div>
   );
 };
 

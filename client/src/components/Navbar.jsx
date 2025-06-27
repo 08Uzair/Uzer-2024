@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartProductByUserID } from "../redux/actions/cart";
 import { toast } from "react-toastify";
 import { addInbox } from "../redux/actions/inbox";
+import { TOAST } from "../utility/constantToast";
 
 const Navbar = () => {
   const [openMessage, setOpenMessage] = useState(false);
@@ -43,12 +44,12 @@ const Navbar = () => {
     try {
       const newInbox = { email, message, user };
       await dispatch(addInbox(newInbox));
-      toast.info("Check your email for updates 😊");
+      toast.info(TOAST.INBOX.INFO_INBOX);
       setOpenMessage(false);
       setMessage("");
     } catch (error) {
       console.log(error);
-      toast.error("Message failed to send");
+      toast.error(TOAST.INBOX.ERROR_INBOX);
     }
   };
 

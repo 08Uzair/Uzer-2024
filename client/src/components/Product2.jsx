@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/actions/products";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -9,8 +9,10 @@ import {
 import { toast } from "react-toastify";
 import Loader from "../utility/Loader";
 
-export function ProductCard2() {
-  const productData = useSelector((state) => state?.products?.products.products);
+function ProductCard2() {
+  const productData = useSelector(
+    (state) => state?.products?.products.products
+  );
   // console.log(productData , "This is product data - 2")
 
   console.log("This is Product Data", productData);
@@ -40,7 +42,6 @@ export function ProductCard2() {
 
     try {
       dispatch(createCartProducts(newProduct));
-      // toast.success("Product added to cart");
     } catch (error) {
       console.log(error);
     }
@@ -130,3 +131,5 @@ export function ProductCard2() {
     </>
   );
 }
+
+export default memo(ProductCard2);

@@ -1,3 +1,4 @@
+import { TOAST } from "../../utility/constantToast";
 import * as api from "../api";
 import {
   FETCH_ORDERS,
@@ -46,7 +47,7 @@ export const updateOrderStatus = (id, updatedOrder) => async (dispatch) => {
   try {
     const { data } = await api.updateOrder(id, updatedOrder);
     dispatch({ type: UPDATE_ORDER_STATUS, payload: data });
-    toast.success("Order Updated Sucessfully");
+    toast.success(TOAST.ORDER.ORDER_UPDATE);
   } catch (error) {
     console.log(error);
   }

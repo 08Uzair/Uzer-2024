@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteOrder,
@@ -8,6 +8,7 @@ import {
 import { getStatus } from "../../redux/actions/status";
 import { toast } from "react-toastify";
 import Loader from "../../utility/Loader";
+import { TOAST } from "../../utility/constantToast";
 
 const OrdersData = () => {
   const dispatch = useDispatch();
@@ -25,14 +26,14 @@ const OrdersData = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteOrder(id));
-    toast.success("Order Deleted Successfully");
+    toast.success(TOAST.ORDER.DELETE_ORDER);
     setDeleted(true);
   };
 
   const handleStatusChange = (orderId, newStatus) => {
     dispatch(updateOrderStatus(orderId, { status: newStatus }));
     dispatch(getOrders());
-    toast.success("Status Updated");
+    toast.success(TOAST.ORDER.ORDER_STATUS);
   };
 
   const handleMouseEnter = (index) => setShowPopoverIndex(index);
@@ -231,4 +232,4 @@ const OrdersData = () => {
   );
 };
 
-export default OrdersData;
+export default memo( OrdersData);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/actions/products";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import {
 import Loader from "../utility/Loader";
 import { Footer } from "./Footer";
 
-export function AllProducts() {
+function AllProducts() {
   const [query, setQuery] = useState("");
   const [userData, setUserData] = useState();
   const dispatch = useDispatch();
@@ -185,8 +185,6 @@ export function AllProducts() {
 
       {/* Product Grid */}
       <div className="mt-16 max-w-7xl mx-auto px-4">
-       
-
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {productData
             ?.filter(
@@ -242,3 +240,5 @@ export function AllProducts() {
     </>
   );
 }
+
+export default memo(AllProducts);

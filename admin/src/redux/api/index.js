@@ -1,7 +1,7 @@
 import axios from "axios";
 const API = axios.create({
-  baseURL: "http://localhost:8100/api/v1/",
-  // baseURL: "https://uzer2024-server.onrender.com/api/v1/",
+  // baseURL: "http://localhost:8100/api/v1/",
+  baseURL: "https://uzer-ecommerce-application-server-2026.onrender.com/api/v1/",
 });
 
 API.interceptors.request.use((req) => {

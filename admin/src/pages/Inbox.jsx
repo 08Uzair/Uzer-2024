@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteInbox, getInbox } from "../redux/actions/inbox";
 import { getTime } from "../utility/getTime";
 import { toast } from "react-toastify";
 import Loader from "../utility/Loader";
+import { TOAST } from "../utility/constantToast";
 
 const Inbox = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Inbox = () => {
   const handleDelete = (id) => {
     dispatch(deleteInbox(id));
     setDeleted(true);
-    toast.success("Message Deleted Successfully 😊");
+    toast.success(TOAST.INBOX.DELETE_INBOX);
   };
 
   if (!data) return <Loader />;
@@ -112,4 +113,4 @@ const Inbox = () => {
   );
 };
 
-export default Inbox;
+export default memo(Inbox);

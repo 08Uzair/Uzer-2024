@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteCartProduct,
   cartProductUpdate,
   getCartProductByUserID,
+  CartProductDeletedByUserId,
 } from "../redux/actions/cart";
-import Navbar from "./Navbar";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { addOrders } from "../redux/actions/orders";
 import Loader from "../utility/Loader";
+import Navbar from "./Navbar";
 import { Footer } from "./Footer";
 import EmptyCart from "./EmptyCart";
+import { toast } from "react-toastify";
+import { TOAST } from "../utility/constantToast";
 
 const CartItems = () => {
   const cartProducts = useSelector((state) => state?.cart);
@@ -43,6 +46,7 @@ const CartItems = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteCartProduct(id));
+    toast.success(TOAST.CART.DELETE_CART);
   };
 
   const handleIncrease = (id) => {
@@ -99,6 +103,7 @@ const CartItems = () => {
     };
     try {
       await dispatch(addOrders(newOrder));
+      // await dispatch(CartProductDeletedByUserId(userData._id));
       window.scrollTo(0, 0);
       navigate("/paymentSucess");
     } catch (error) {
@@ -221,4 +226,4 @@ const CartItems = () => {
   );
 };
 
-export default CartItems;
+export default memo(CartItems);

@@ -1,53 +1,86 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import ProtectedRoute from "../components/ProtectedRoute";
+import Loader from "../utility/Loader";
 
-import Home from "../pages/Home";
-import Auth from "../components/Auth";
-import ProductPage from "../components/ProductPage";
-import UserProfile from "../components/UserProfile";
-import CartPage from "../components/CartPage";
-import { AllProducts } from "../components/AllProducts";
-import EmptyCart from "../components/EmptyCart";
-import Sucess from "../components/Sucess";
+const Home = lazy(() => import("../pages/Home"));
+const Auth = lazy(() => import("../components/Auth"));
+const ProductPage = lazy(() => import("../components/ProductPage"));
+const UserProfile = lazy(() => import("../components/UserProfile"));
+const CartPage = lazy(() => import("../components/CartPage"));
+const AllProducts = lazy(() => import("../components/AllProducts"));
+const EmptyCart = lazy(() => import("../components/EmptyCart"));
+const Sucess = lazy(() => import("../components/Sucess"));
 
 const profile = JSON.parse(localStorage.getItem("profile"));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <Home />
+      </Suspense>
+    ),
   },
   {
     path: "/singleProduct/:id",
-    element: <ProductPage />,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <ProductPage />
+      </Suspense>
+    ),
   },
   {
     path: "/auth",
-    element: !profile ? <Auth /> : <Navigate to="/" replace />,
+    element: (
+      <Suspense fallback={<Loader />}>
+        {!profile ? <Auth /> : <Navigate to="/" replace />}
+      </Suspense>
+    ),
   },
   {
     path: "/allProducts",
-    element: <AllProducts />,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <AllProducts />
+      </Suspense>
+    ),
   },
   {
     element: <ProtectedRoute />,
     children: [
       {
         path: "/userProfile",
-        element: <UserProfile />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <UserProfile />
+          </Suspense>
+        ),
       },
       {
         path: "/cart",
-        element: <CartPage />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <CartPage />
+          </Suspense>
+        ),
       },
-
       {
         path: "/emptyCart",
-        element: <EmptyCart />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <EmptyCart />
+          </Suspense>
+        ),
       },
       {
         path: "/paymentSucess",
-        element: <Sucess />,
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Sucess />
+          </Suspense>
+        ),
       },
     ],
   },

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/actions/product";
 import { NavLink, useNavigate } from "react-router-dom";
 import Loader from "../../utility/Loader";
 import { simpleDate } from "../../utility/getTime";
 import { toast } from "react-toastify";
+import { TOAST } from "../../utility/constantToast";
 
 const truncateString = (input, length) =>
   input?.length > length ? input.slice(0, length) + "..." : input;
@@ -91,7 +92,7 @@ const ProductsData = () => {
   const handleDelete = (id) => {
     dispatch(deleteProduct(id));
     dispatch(getProducts());
-    toast.success("Product Deleted Successfully");
+    toast.success(TOAST.PRODUCT.DELETE_PRODUCT);
   };
 
   if (!productData) return <Loader />;
@@ -223,4 +224,4 @@ const ProductsData = () => {
   );
 };
 
-export default ProductsData;
+export default memo( ProductsData);

@@ -7,6 +7,7 @@ import {
   DELETE_PRODUCTS,
   UPDATE_PRODUCTS,
 } from "../constants/actionTypes";
+import { TOAST } from "../../utility/constantToast";
 
 export const getProducts = () => async (dispatch) => {
   try {
@@ -19,7 +20,7 @@ export const getProducts = () => async (dispatch) => {
 
 export const createProducts = (product) => async (dispatch) => {
   try {
-    toast.success("Product Created Sucessfully");
+    toast.success(TOAST.PRODUCT.CREATE_PRODUCT);
     const { data } = await api.createProducts(product);
     dispatch({ type: CREATE_PRODUCT, payload: data });
   } catch (error) {
@@ -40,7 +41,7 @@ export const updateProduct = (id, updatedProduct) => async (dispatch) => {
   try {
     const { data } = await api.updateProducts(id, updatedProduct);
     dispatch({ type: UPDATE_PRODUCTS, payload: data });
-    toast.success("Updated Sucessfully");
+    toast.success(TOAST.PRODUCT.UPDATE_PRODUCT);
   } catch (error) {
     console.log(error);
   }
@@ -48,7 +49,7 @@ export const updateProduct = (id, updatedProduct) => async (dispatch) => {
 
 export const deleteProduct = (id) => async (dispatch) => {
   try {
-    toast.success("Product Deleted Sucessfully");
+    toast.success(TOAST.PRODUCT.DELETE_PRODUCT);
     await api.deleteProducts(id);
     dispatch({ type: DELETE_PRODUCTS, payload: id });
   } catch (error) {
