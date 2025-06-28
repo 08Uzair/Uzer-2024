@@ -1,0 +1,13 @@
+name: Scheduled Task
+
+on:
+  schedule:
+     - cron: '* * * * *'
+  workflow_dispatch:
+
+jobs:
+  run-cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Render App API
+        run: curl -X GET https://uzer-ecommerce-application-server-2026.onrender.com/api/v1/products
