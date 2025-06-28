@@ -1,5 +1,5 @@
 
-## 🛒 Full Stack E-Commerce Application (MERN + Tailwind CSS)
+# 🛒 Full Stack E-Commerce Application (MERN + Tailwind CSS)
 
 
 ### 🖥️ Client Side
@@ -128,7 +128,7 @@ Ensure you have **Node.js** and **MongoDB** installed.
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone "https://github.com/08Uzair/Uzer-Ecommerce-Application-2026.git"
+git clone "https://github.com/08Uzair/Uzer-2024.git"
 cd Uzer-Ecommerce-Application-2026
 ```
 
