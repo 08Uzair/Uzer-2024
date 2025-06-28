@@ -79,7 +79,7 @@ const Auth = () => {
       setLoadingTextIndex((prev) =>
         prev + 1 < btnStages.length ? prev + 1 : 0
       );
-    }, 1000);
+    }, 2000);
     setTextCycleInterval(interval);
   };
 
@@ -372,6 +372,7 @@ const SignUpForm = ({
         {step > 1 && (
           <button
             type="button"
+            disabled={loading}
             onClick={() => setStep(step - 1)}
             className="px-5 py-2 bg-gray-200 text-gray-800 rounded-xl hover:bg-gray-300"
           >
@@ -381,6 +382,7 @@ const SignUpForm = ({
         {step < 4 ? (
           <button
             type="button"
+            disabled={loading}
             onClick={handleNext}
             className="ml-auto px-5 py-2 bg-[#2563eb] text-white rounded-xl hover:bg-indigo-600"
           >
