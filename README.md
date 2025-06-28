@@ -1,5 +1,5 @@
 
-# 🛒 Full Stack E-Commerce Application (MERN + Tailwind CSS)
+## 🛒 Full Stack E-Commerce Application (MERN + Tailwind CSS)
 
 
 ### 🖥️ Client Side
