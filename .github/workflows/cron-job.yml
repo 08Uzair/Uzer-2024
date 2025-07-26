@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call Render App API
-        run: curl -X GET https://uzer-ecommerce-application-server-2026.onrender.com/api/v1/products
+        run: curl -X GET https://uzer-ecommerce-application-server-2026-aos5.onrender.com/api/v1/products
